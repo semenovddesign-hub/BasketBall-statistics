@@ -7,15 +7,17 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Shots">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#3A3A3A">
-<link rel="manifest" href="data:application/json;base64,eyJuYW1lIjogIlNob3QgVHJhY2tlciIsICJzaG9ydF9uYW1lIjogIlNob3RzIiwgInN0YXJ0X3VybCI6ICIuIiwgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMzQTNBM0EiLCAidGhlbWVfY29sb3IiOiAiIzNBM0EzQSIsICJpY29ucyI6IFt7InNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWwsJTNDc3ZnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zycgdmlld0JveD0nMCAwIDEwMCAxMDAnJTNFJTNDY2lyY2xlIGN4PSc1MCcgY3k9JzUwJyByPSc0Nicgc3Ryb2tlPSclMjNmZmYnIHN0cm9rZS13aWR0aD0nNCcgZmlsbD0nJTIzMUExQTFBJy8lM0UlM0NsaW5lIHgxPSc1MCcgeTE9JzQnIHgyPSc1MCcgeTI9Jzk2JyBzdHJva2U9JyUyM2ZmZicgc3Ryb2tlLXdpZHRoPSczJy8lM0UlM0NsaW5lIHgxPSc0JyB5MT0nNTAnIHgyPSc5NicgeTI9JzUwJyBzdHJva2U9JyUyM2ZmZicgc3Ryb2tlLXdpZHRoPSczJy8lM0UlM0NwYXRoIGQ9J00xNCAxNEMyOCAyOCAyOCA3MiAxNCA4Nicgc3Ryb2tlPSclMjNmZmYnIHN0cm9rZS13aWR0aD0nMycgZmlsbD0nbm9uZScvJTNFJTNDcGF0aCBkPSdNODYgMTRDNzIgMjggNzIgNzIgODYgODYnIHN0cm9rZT0nJTIzZmZmJyBzdHJva2Utd2lkdGg9JzMnIGZpbGw9J25vbmUnLyUzRSUzQy9zdmclM0UiLCAic2l6ZXMiOiAiMTkyeDE5MiIsICJ0eXBlIjogImltYWdlL3N2Zyt4bWwifV19">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%231A1A1A'/%3E%3Ccircle cx='90' cy='90' r='60' stroke='%23fff' stroke-width='5' fill='none'/%3E%3Cline x1='90' y1='30' x2='90' y2='150' stroke='%23fff' stroke-width='4'/%3E%3Cline x1='30' y1='90' x2='150' y2='90' stroke='%23fff' stroke-width='4'/%3E%3Cpath d='M45 45C65 65 65 115 45 135' stroke='%23fff' stroke-width='4' fill='none'/%3E%3Cpath d='M135 45C115 65 115 115 135 135' stroke='%23fff' stroke-width='4' fill='none'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#1A2A4D">
+<link rel="manifest" href="data:application/json;base64,eyJuYW1lIjogIlNob3QgVHJhY2tlciIsICJzaG9ydF9uYW1lIjogIlNob3RzIiwgInN0YXJ0X3VybCI6ICIuIiwgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMxQTJBNEQiLCAidGhlbWVfY29sb3IiOiAiIzFBMkE0RCIsICJpY29ucyI6IFt7InNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWwsJTNDc3ZnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zycgdmlld0JveD0nMCAwIDEwMCAxMDAnJTNFJTNDcmVjdCB3aWR0aD0nMTAwJyBoZWlnaHQ9JzEwMCcgcng9JzIyJyBmaWxsPSclMjMxQTJBNEQnLyUzRSUzQ2NpcmNsZSBjeD0nNTAnIGN5PSc1MCcgcj0nMzUnIHN0cm9rZT0nJTIzZmZmJyBzdHJva2Utd2lkdGg9JzMnIGZpbGw9J25vbmUnLyUzRSUzQ2xpbmUgeDE9JzUwJyB5MT0nMTUnIHgyPSc1MCcgeTI9Jzg1JyBzdHJva2U9JyUyM2ZmZicgc3Ryb2tlLXdpZHRoPScyLjUnLyUzRSUzQ2xpbmUgeDE9JzE1JyB5MT0nNTAnIHgyPSc4NScgeTI9JzUwJyBzdHJva2U9JyUyM2ZmZicgc3Ryb2tlLXdpZHRoPScyLjUnLyUzRSUzQ3BhdGggZD0nTTIzIDIzQzM1IDM1IDM1IDY1IDIzIDc3JyBzdHJva2U9JyUyM2ZmZicgc3Ryb2tlLXdpZHRoPScyLjUnIGZpbGw9J25vbmUnLyUzRSUzQ3BhdGggZD0nTTc3IDIzQzY1IDM1IDY1IDY1IDc3IDc3JyBzdHJva2U9JyUyM2ZmZicgc3Ryb2tlLXdpZHRoPScyLjUnIGZpbGw9J25vbmUnLyUzRSUzQy9zdmclM0UiLCAic2l6ZXMiOiAiMTkyeDE5MiIsICJ0eXBlIjogImltYWdlL3N2Zyt4bWwifV19">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%231A2A4D'/%3E%3Ccircle cx='90' cy='90' r='55' stroke='%23fff' stroke-width='4' fill='none'/%3E%3Cline x1='90' y1='35' x2='90' y2='145' stroke='%23fff' stroke-width='3'/%3E%3Cline x1='35' y1='90' x2='145' y2='90' stroke='%23fff' stroke-width='3'/%3E%3Cpath d='M48 48C65 65 65 115 48 132' stroke='%23fff' stroke-width='3' fill='none'/%3E%3Cpath d='M132 48C115 65 115 115 132 132' stroke='%23fff' stroke-width='3' fill='none'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body,#root{width:100%;height:100%;height:100dvh;overflow:hidden}
-body{background:#3A3A3A;overscroll-behavior:none;-webkit-overflow-scrolling:touch}
-input,button{-webkit-appearance:none;appearance:none}
+body{background:#1A2A4D;overscroll-behavior:none;-webkit-overflow-scrolling:touch;font-family:-apple-system,'Helvetica Neue',sans-serif}
+input,button{-webkit-appearance:none;appearance:none;font-family:inherit}
 </style>
 <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
 <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
@@ -26,905 +28,661 @@ input,button{-webkit-appearance:none;appearance:none}
 <script type="text/babel">
 const { useState, useEffect, useRef, useCallback } = React;
 
-/* ─── palette ─── */
-const C = {
-  bg: "#3A3A3A", bgLight: "#444", card: "#4A4A4A", cardLight: "#525252",
-  court: "#F5F0E3", courtLine: "#C8C0B0",
-  dark: "#1A1A1A", darkSoft: "#2C2C2C",
-  green: "#5BBF3D", greenDark: "#3D8C28",
-  red: "#E74C3C", redSoft: "#FF6B6B",
-  orange: "#E8782A",
-  gray: "#888", grayLight: "#AAA", grayUltra: "#555",
-  white: "#F0F0F0", pureWhite: "#FFF",
-  gold: "#F59E0B", silver: "#94A3B8", bronze: "#C2855A",
-  accent: "#5BBF3D",
+/* ═══ DESIGN TOKENS — exact from SVG ═══ */
+const T = {
+  bg: "#1A2A4D",
+  glass: { court: "rgba(255,255,255,0.113)", stats: "rgba(217,217,217,0.118)", timer: "rgba(255,255,255,0.213)", tab: "rgba(217,217,217,0.118)" },
+  r: { card: 14, stats: 10, btn: 15, timer: 14, tab: 31, dot: 14, dotSel: 20, statBox: 6 },
+  green: "#009817", greenGlow: "rgba(0,152,23,0.4)",
+  red: "#FE4800", redDark: "#5E0E0E",
+  black: "#000000",
+  dotBg: "#4A4A4A", dotStroke: "#BDBDBD",
+  courtLine: "#BDBDBD",
+  white: "#FFFFFF", gray: "#909090", grayLight: "#BDBDBD",
 };
-const FONT = "'SF Pro Display', 'Helvetica Neue', -apple-system, sans-serif";
-const MONO = "'SF Mono', 'Menlo', monospace";
+const TITLE = "'Dela Gothic One', cursive";
+const MONO = "'JetBrains Mono', monospace";
+const SYS = "-apple-system, 'Helvetica Neue', sans-serif";
 
-/* ─── 13 positions matching the court layout ─── */
-const POSITIONS = [
-  { id: 1, name: "Под кольцом (лево)", x: 39, y: 12 },
-  { id: 2, name: "Под кольцом (право)", x: 56, y: 12 },
-  { id: 3, name: "Центр под кольцом", x: 47.5, y: 22 },
-  { id: 4, name: "Верх ключа (лево)", x: 27, y: 12 },
-  { id: 5, name: "Штрафная (лево)", x: 33, y: 38 },
-  { id: 6, name: "Штрафная (центр)", x: 47.5, y: 46 },
-  { id: 7, name: "Штрафная (право)", x: 62, y: 38 },
-  { id: 8, name: "Верх ключа (право)", x: 68, y: 12 },
-  { id: 9, name: "Угол (лево)", x: 8, y: 12 },
-  { id: 10, name: "Крыло (лево)", x: 14, y: 46 },
-  { id: 11, name: "Трёхочковая (центр)", x: 47.5, y: 58 },
-  { id: 12, name: "Крыло (право)", x: 82, y: 46 },
-  { id: 13, name: "Угол (право)", x: 88, y: 12 },
+/* ═══ POSITIONS ═══ */
+const P = [
+  { id: 1, name: "Под кольцом лево", x: 39, y: 13 },
+  { id: 2, name: "Под кольцом право", x: 56, y: 13 },
+  { id: 3, name: "Центр под кольцом", x: 47.5, y: 23 },
+  { id: 4, name: "Верх ключа лево", x: 27, y: 13 },
+  { id: 5, name: "Штрафная лево", x: 33, y: 39 },
+  { id: 6, name: "Штрафная линия", x: 47.5, y: 48 },
+  { id: 7, name: "Штрафная право", x: 62, y: 39 },
+  { id: 8, name: "Верх ключа право", x: 68, y: 13 },
+  { id: 9, name: "Угол лево", x: 8, y: 13 },
+  { id: 10, name: "Крыло лево", x: 14, y: 48 },
+  { id: 11, name: "Трёхочковая центр", x: 47.5, y: 60 },
+  { id: 12, name: "Крыло право", x: 82, y: 48 },
+  { id: 13, name: "Угол право", x: 88, y: 13 },
 ];
 
-/* ─── Random team names (Native American spirit) ─── */
-const TEAM_NAMES = [
-  "Серые Волки", "Ночные Ястребы", "Красные Орлы", "Тихие Бизоны",
-  "Чёрные Пантеры", "Белые Медведи", "Горные Лисы", "Степные Койоты",
-  "Громовые Совы", "Дикие Мустанги", "Речные Выдры", "Лунные Рыси",
-  "Огненные Вороны", "Северные Лоси", "Каменные Барсы", "Быстрые Олени",
-  "Вечерние Пумы", "Утренние Соколы", "Песчаные Скорпионы", "Лесные Филины",
-];
-function getRandomTeams() {
-  const shuffled = [...TEAM_NAMES].sort(() => Math.random() - 0.5);
-  return [shuffled[0], shuffled[1]];
-}
-function getRandomName() {
-  return TEAM_NAMES[Math.floor(Math.random() * TEAM_NAMES.length)];
-}
+const TEAMS = ["Серые Волки","Ночные Ястребы","Красные Орлы","Тихие Бизоны","Чёрные Пантеры","Белые Медведи","Горные Лисы","Степные Койоты","Громовые Совы","Дикие Мустанги","Речные Выдры","Лунные Рыси","Огненные Вороны","Северные Лоси","Каменные Барсы","Быстрые Олени"];
+function rTeams() { const s = [...TEAMS].sort(() => Math.random() - 0.5); return [s[0], s[1]]; }
+function rName() { return TEAMS[Math.floor(Math.random() * TEAMS.length)]; }
 
-/* ─── Haptic feedback ─── */
-function haptic(style = "light") {
+function vib(s = "light") { try { navigator.vibrate?.(s === "heavy" ? 30 : s === "medium" ? 15 : 8); } catch(e){} }
+
+function playSiren() {
   try {
-    if (navigator.vibrate) {
-      navigator.vibrate(style === "heavy" ? 30 : style === "medium" ? 15 : 8);
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    for (let i = 0; i < 3; i++) {
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.connect(g); g.connect(ctx.destination); o.type = "sawtooth";
+      o.frequency.setValueAtTime(600, ctx.currentTime + i * 0.9);
+      o.frequency.linearRampToValueAtTime(900, ctx.currentTime + i * 0.9 + 0.4);
+      o.frequency.linearRampToValueAtTime(600, ctx.currentTime + i * 0.9 + 0.8);
+      g.gain.setValueAtTime(0.3, ctx.currentTime + i * 0.9);
+      g.gain.linearRampToValueAtTime(0, ctx.currentTime + i * 0.9 + 0.85);
+      o.start(ctx.currentTime + i * 0.9); o.stop(ctx.currentTime + i * 0.9 + 0.85);
     }
-  } catch (e) {}
+    setTimeout(() => ctx.close(), 3000);
+  } catch(e){}
 }
 
-/* ─── Utils ─── */
-function fmtTime(sec) {
-  const m = Math.floor(sec / 60), s = sec % 60;
-  return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
-}
-function fmtTimeFull(sec) {
-  const h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60), s = sec % 60;
-  return `${h}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
-}
-function initStats() {
-  const s = {};
-  POSITIONS.forEach(p => { s[p.id] = { made: 0, missed: 0 }; });
-  return s;
+function fmt(s) { const m = Math.floor(s / 60), ss = s % 60; return `${String(m).padStart(2, "0")}:${String(ss).padStart(2, "0")}`; }
+function fmtF(s) { const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), ss = s % 60; return `${h}:${String(m).padStart(2, "0")}:${String(ss).padStart(2, "0")}`; }
+function initS() { const s = {}; P.forEach(p => { s[p.id] = { made: 0, missed: 0 }; }); return s; }
+
+/* ═══ GLASS — exact from SVG ═══ */
+function Glass({ children, type = "court", style: sx, onClick }) {
+  return <div onClick={onClick} style={{
+    background: T.glass[type] || T.glass.court,
+    backdropFilter: "blur(40px)", WebkitBackdropFilter: "blur(40px)",
+    borderRadius: type === "tab" ? T.r.tab : type === "stats" ? T.r.stats : T.r.card,
+    ...sx
+  }}>{children}</div>;
 }
 
-/* ─── Basketball SVG icon (B&W) ─── */
-function BballIcon({ size = 28, active, filled }) {
-  const color = active ? C.white : C.grayLight;
+/* ═══ PRESS BUTTON ═══ */
+function Btn({ children, onClick, bg, full, disabled, style: sx }) {
+  const [p, setP] = useState(false);
+  const go = () => { if (disabled) return; setP(true); vib(bg === T.green || bg === T.red ? "heavy" : "medium"); onClick?.(); setTimeout(() => setP(false), 150); };
   return (
-    <svg width={size} height={size} viewBox="0 0 32 32" fill="none">
-      <circle cx="16" cy="16" r="14" stroke={color} strokeWidth="2" fill={filled ? color : "none"} />
-      {!filled && <>
-        <path d="M16 2C16 2 16 30 16 30" stroke={color} strokeWidth="1.5" />
-        <path d="M2 16C2 16 30 16 30 16" stroke={color} strokeWidth="1.5" />
-        <path d="M5 5C10 10 10 22 5 27" stroke={color} strokeWidth="1.5" fill="none" />
-        <path d="M27 5C22 10 22 22 27 27" stroke={color} strokeWidth="1.5" fill="none" />
-      </>}
-      {filled && <>
-        <path d="M16 2C16 2 16 30 16 30" stroke={C.bg} strokeWidth="1.5" />
-        <path d="M2 16C2 16 30 16 30 16" stroke={C.bg} strokeWidth="1.5" />
-        <path d="M5 5C10 10 10 22 5 27" stroke={C.bg} strokeWidth="1.5" fill="none" />
-        <path d="M27 5C22 10 22 22 27 27" stroke={C.bg} strokeWidth="1.5" fill="none" />
-      </>}
-    </svg>
-  );
-}
-
-/* ─── Animated Button with press feedback ─── */
-function PressBtn({ children, onClick, bg, color, full, disabled, style: sx, big }) {
-  const [pressed, setPressed] = useState(false);
-  const handlePress = () => {
-    if (disabled) return;
-    setPressed(true);
-    haptic(big ? "heavy" : "light");
-    onClick?.();
-    setTimeout(() => setPressed(false), 150);
-  };
-  const pressedBg = bg === C.green ? C.greenDark : bg === C.red ? "#C0392B" : bg === C.dark ? "#000" : (bg || C.green) + "CC";
-  return (
-    <button disabled={disabled} onClick={handlePress} style={{
-      width: full ? "100%" : "auto",
-      padding: big ? "22px 24px" : "16px 24px",
-      borderRadius: big ? 20 : 14, border: "none",
-      background: pressed ? pressedBg : disabled ? C.grayUltra : (bg || C.green),
-      color: disabled ? C.gray : (color || C.pureWhite),
-      fontFamily: FONT, fontSize: big ? 20 : 16, fontWeight: 700,
+    <button disabled={disabled} onClick={go} style={{
+      width: full ? "100%" : "auto", padding: "18px 24px",
+      borderRadius: T.r.btn, border: "none",
+      background: p ? (bg === T.green ? "#006E10" : bg === T.red ? "#B33600" : bg === T.black ? "#333" : "#555") : disabled ? "#333" : (bg || T.green),
+      color: disabled ? "#666" : T.white,
+      fontFamily: TITLE, fontSize: 18,
       cursor: disabled ? "default" : "pointer",
       opacity: disabled ? 0.4 : 1,
-      transition: "all 0.1s ease-out",
-      transform: pressed ? "scale(0.96)" : "scale(1)",
+      transition: "all 0.1s", transform: p ? "scale(0.96)" : "scale(1)",
       ...sx,
     }}>{children}</button>
   );
 }
 
-/* ─── Small tap button ─── */
-function TapBtn({ children, onClick, bg, color, style: sx }) {
-  const [pressed, setPressed] = useState(false);
-  return (
-    <button onClick={() => { setPressed(true); haptic(); onClick?.(); setTimeout(() => setPressed(false), 120); }} style={{
-      padding: "8px 16px", borderRadius: 10, border: "none",
-      background: pressed ? (bg || C.cardLight) + "99" : (bg || C.cardLight),
-      color: color || C.white, fontFamily: FONT, fontSize: 13, fontWeight: 600,
-      cursor: "pointer", transition: "all 0.1s", transform: pressed ? "scale(0.95)" : "scale(1)", ...sx,
-    }}>{children}</button>
-  );
+function SmBtn({ children, onClick, bg, color, style: sx }) {
+  const [p, setP] = useState(false);
+  return <button onClick={() => { setP(true); vib(); onClick?.(); setTimeout(() => setP(false), 120); }} style={{
+    padding: "8px 16px", borderRadius: 10, border: "none",
+    background: p ? "rgba(255,255,255,0.15)" : (bg || "rgba(255,255,255,0.1)"),
+    color: color || T.white, fontFamily: SYS, fontSize: 13, fontWeight: 600,
+    cursor: "pointer", transition: "all 0.1s", transform: p ? "scale(0.95)" : "scale(1)", ...sx,
+  }}>{children}</button>;
 }
 
-/* ─── Cards ─── */
-function Card({ children, style: sx }) {
-  return <div style={{ background: C.card, borderRadius: 16, padding: "16px 18px", ...sx }}>{children}</div>;
-}
-function SectionLabel({ children }) {
-  return <div style={{ fontSize: 11, color: C.grayLight, fontWeight: 600, marginBottom: 8, textTransform: "uppercase", letterSpacing: "0.06em" }}>{children}</div>;
-}
-
-/* ─── Number Stepper ─── */
-function NumberStepper({ label, value, onChange, min = 1, max = 99, unit }) {
+/* ═══ STEPPER ═══ */
+function Stepper({ label, value, onChange, min = 1, max = 99, unit }) {
   return (
     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-      <span style={{ fontSize: 14, color: C.white, fontWeight: 500 }}>{label}</span>
+      <span style={{ fontSize: 14, color: T.white, fontFamily: SYS }}>{label}</span>
       <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-        <TapBtn onClick={() => onChange(Math.max(min, value - 1))} bg={C.cardLight} style={{ width: 36, height: 36, padding: 0, borderRadius: 10, fontSize: 18, display: "flex", alignItems: "center", justifyContent: "center" }}>−</TapBtn>
-        <span style={{ fontSize: 20, fontWeight: 800, fontFamily: MONO, minWidth: 36, textAlign: "center", color: C.white }}>{value}</span>
-        <TapBtn onClick={() => onChange(Math.min(max, value + 1))} bg={C.cardLight} style={{ width: 36, height: 36, padding: 0, borderRadius: 10, fontSize: 18, display: "flex", alignItems: "center", justifyContent: "center" }}>+</TapBtn>
-        {unit && <span style={{ fontSize: 12, color: C.gray }}>{unit}</span>}
+        <SmBtn onClick={() => onChange(Math.max(min, value - 1))} style={{ width: 36, height: 36, padding: 0, borderRadius: 10, fontSize: 18, display: "flex", alignItems: "center", justifyContent: "center" }}>−</SmBtn>
+        <span style={{ fontSize: 20, fontWeight: 700, fontFamily: MONO, minWidth: 36, textAlign: "center", color: T.white }}>{value}</span>
+        <SmBtn onClick={() => onChange(Math.min(max, value + 1))} style={{ width: 36, height: 36, padding: 0, borderRadius: 10, fontSize: 18, display: "flex", alignItems: "center", justifyContent: "center" }}>+</SmBtn>
+        {unit && <span style={{ fontSize: 12, color: T.gray }}>{unit}</span>}
       </div>
     </div>
   );
 }
 
-/* ─── Tab Bar ─── */
+/* ═══ TAB BAR — pill shape from SVG ═══ */
 function TabBar({ active, onTab }) {
   const tabs = [
-    { id: "training", label: "Тренировка" },
-    { id: "game", label: "Матч" },
-    { id: "history", label: "История" },
-    { id: "profile", label: "Профиль" },
+    { id: "training", label: "Тренировка", icon: (a) => <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="13" stroke={a?T.white:T.gray} strokeWidth="2" fill={a?T.white:"none"}/><line x1="16" y1="3" x2="16" y2="29" stroke={a?"#1A2A4D":a?T.white:T.gray} strokeWidth="1.5"/><line x1="3" y1="16" x2="29" y2="16" stroke={a?"#1A2A4D":T.gray} strokeWidth="1.5"/><path d="M6 6C11 11 11 21 6 26" stroke={a?"#1A2A4D":T.gray} strokeWidth="1.5" fill="none"/><path d="M26 6C21 11 21 21 26 26" stroke={a?"#1A2A4D":T.gray} strokeWidth="1.5" fill="none"/></svg> },
+    { id: "game", label: "Матч", icon: (a) => <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect x="6" y="4" width="20" height="24" rx="3" stroke={a?T.white:T.gray} strokeWidth="2" fill={a?T.white:"none"}/><line x1="6" y1="10" x2="26" y2="10" stroke={a?"#1A2A4D":T.gray} strokeWidth="1.5"/><circle cx="16" cy="20" r="4" stroke={a?"#1A2A4D":T.gray} strokeWidth="1.5" fill="none"/></svg> },
+    { id: "history", label: "История", icon: (a) => <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="13" stroke={a?T.white:T.gray} strokeWidth="2" fill={a?T.white:"none"}/><line x1="16" y1="9" x2="16" y2="17" stroke={a?"#1A2A4D":T.gray} strokeWidth="2" strokeLinecap="round"/><line x1="16" y1="17" x2="22" y2="17" stroke={a?"#1A2A4D":T.gray} strokeWidth="2" strokeLinecap="round"/></svg> },
+    { id: "profile", label: "Профиль", icon: (a) => <svg width="28" height="28" viewBox="0 0 32 32"><text x="16" y="23" textAnchor="middle" fontSize="20" fontWeight="900" fontFamily={MONO} fill={a?T.white:T.gray}>23</text></svg> },
   ];
   return (
-    <div style={{ display: "flex", justifyContent: "space-around", background: C.dark, padding: "10px 0 4px" }}>
-      {tabs.map(t => (
-        <button key={t.id} onClick={() => { haptic(); onTab(t.id); }} style={{
-          background: "none", border: "none", display: "flex", flexDirection: "column",
-          alignItems: "center", gap: 4, cursor: "pointer", padding: "4px 12px", fontFamily: FONT,
-        }}>
-          <BballIcon size={26} active={active === t.id} filled={active === t.id} />
-          <span style={{ fontSize: 10, fontWeight: 600, color: active === t.id ? C.white : C.gray }}>{t.label}</span>
-        </button>
-      ))}
+    <div style={{ padding: "0 16px 0" }}>
+      <Glass type="tab" style={{ display: "flex", justifyContent: "space-around", padding: "10px 0 6px" }}>
+        {tabs.map(t => (
+          <button key={t.id} onClick={() => { vib(); onTab(t.id); }} style={{
+            background: "none", border: "none", display: "flex", flexDirection: "column",
+            alignItems: "center", gap: 3, cursor: "pointer", padding: "4px 8px",
+          }}>
+            {t.icon(active === t.id)}
+            <span style={{ fontSize: 10, fontWeight: 500, fontFamily: SYS, color: active === t.id ? T.white : T.gray }}>{t.label}</span>
+          </button>
+        ))}
+      </Glass>
     </div>
   );
 }
 
-/* ─── Court SVG — accurate layout from design ─── */
-function CourtSVG({ stats, selectedPos, onSelectPos, disabled }) {
+/* ═══ COURT — exact from SVG ═══ */
+function Court({ stats, sel, onSel, disabled }) {
   return (
-    <svg viewBox="0 0 95 66" style={{ width: "100%", display: "block", opacity: disabled ? 0.5 : 1 }}>
-      {/* Court bg */}
-      <rect x="0" y="0" width="95" height="66" rx="6" fill={C.court} />
+    <Glass type="court" style={{ padding: 10 }}>
+      <svg viewBox="0 0 95 68" style={{ width: "100%", display: "block", opacity: disabled ? 0.5 : 1 }}>
+        {/* Court rect */}
+        <rect x="4" y="3" width="87" height="62" rx="1" fill="none" stroke={T.courtLine} strokeWidth="0.5" />
+        {/* Paint */}
+        <rect x="28" y="3" width="39" height="33" fill="none" stroke={T.courtLine} strokeWidth="0.5" />
+        {/* Inner box */}
+        <rect x="36" y="3" width="23" height="18" fill="none" stroke={T.courtLine} strokeWidth="0.4" />
+        {/* Free throw arc */}
+        <path d="M 28 36 Q 28 52 47.5 52 Q 67 52 67 36" fill="none" stroke={T.courtLine} strokeWidth="0.5" />
+        {/* 3pt arc */}
+        <path d="M 4 16 Q 4 65 47.5 65 Q 91 65 91 16" fill="none" stroke={T.courtLine} strokeWidth="0.5" />
+        {/* 3pt sidelines */}
+        <line x1="4" y1="3" x2="4" y2="16" stroke={T.courtLine} strokeWidth="0.5" />
+        <line x1="91" y1="3" x2="91" y2="16" stroke={T.courtLine} strokeWidth="0.5" />
+        {/* Backboard */}
+        <line x1="40" y1="3.5" x2="55" y2="3.5" stroke={T.white} strokeWidth="1.5" strokeLinecap="round" />
+        {/* Ring */}
+        <circle cx="47.5" cy="7" r="2.2" fill="none" stroke={T.red} strokeWidth="0.8" />
 
-      {/* Baseline */}
-      <line x1="5" y1="4" x2="90" y2="4" stroke={C.courtLine} strokeWidth="0.6" />
-      {/* Sidelines */}
-      <line x1="5" y1="4" x2="5" y2="66" stroke={C.courtLine} strokeWidth="0.6" />
-      <line x1="90" y1="4" x2="90" y2="66" stroke={C.courtLine} strokeWidth="0.6" />
+        {P.map(p => {
+          const s = stats[p.id] || { made: 0, missed: 0 };
+          const total = s.made + s.missed;
+          const pct = total > 0 ? Math.round((s.made / total) * 100) : null;
+          const isSel = sel === p.id;
+          const r = isSel ? 5.5 : 4;
+          const bg = isSel ? T.green : pct === null ? T.dotBg : pct >= 70 ? T.green : pct >= 40 ? "#E8782A" : T.red;
 
-      {/* Paint / key rectangle */}
-      <rect x="30" y="4" width="35" height="32" fill="none" stroke={C.courtLine} strokeWidth="0.6" />
-      {/* Inner box */}
-      <rect x="37" y="4" width="21" height="18" fill="none" stroke={C.courtLine} strokeWidth="0.5" />
-
-      {/* Free throw circle */}
-      <circle cx="47.5" cy="36" r="11" fill="none" stroke={C.courtLine} strokeWidth="0.5" />
-
-      {/* Three-point arc */}
-      <path d="M 5 14 Q 5 62 47.5 62 Q 90 62 90 14" fill="none" stroke={C.courtLine} strokeWidth="0.6" />
-
-      {/* Backboard */}
-      <line x1="41" y1="3" x2="54" y2="3" stroke={C.dark} strokeWidth="1.2" />
-      {/* Basket ring */}
-      <circle cx="47.5" cy="6.5" r="2" fill="none" stroke={C.orange} strokeWidth="0.8" />
-
-      {/* Position dots */}
-      {POSITIONS.map(p => {
-        const s = stats[p.id] || { made: 0, missed: 0 };
-        const total = s.made + s.missed;
-        const pct = total > 0 ? Math.round((s.made / total) * 100) : null;
-        const isSelected = selectedPos === p.id;
-        const r = 4;
-        const dotBg = isSelected ? C.green :
-          pct === null ? C.darkSoft :
-          pct >= 70 ? C.green : pct >= 40 ? C.orange : C.red;
-
-        return (
-          <g key={p.id} onClick={() => { if (!disabled) { haptic(); onSelectPos(p.id); } }} style={{ cursor: disabled ? "default" : "pointer" }}>
-            {isSelected && <circle cx={p.x} cy={p.y} r={r + 2.5} fill={C.green} opacity="0.2" />}
-            <circle cx={p.x} cy={p.y} r={r} fill={dotBg} stroke="rgba(0,0,0,0.2)" strokeWidth="0.3" />
-            <text x={p.x} y={p.y + 1.5} textAnchor="middle" fontSize="4" fontWeight="800" fill={C.pureWhite} fontFamily={MONO} style={{ pointerEvents: "none" }}>
-              {pct !== null ? pct : p.id}
-            </text>
-          </g>
-        );
-      })}
-    </svg>
+          return (
+            <g key={p.id} onClick={() => { if (!disabled) { vib(); onSel(p.id); } }} style={{ cursor: disabled ? "default" : "pointer" }}>
+              {isSel && <circle cx={p.x} cy={p.y} r={r + 3} fill={T.greenGlow} />}
+              <circle cx={p.x} cy={p.y} r={r} fill={bg} stroke={isSel ? T.green : T.dotStroke} strokeWidth={isSel ? 0.4 : 0.3} />
+              <text x={p.x} y={p.y + 1.8} textAnchor="middle" fontSize={isSel ? "5" : "4.2"} fontWeight="700" fill={T.white} fontFamily={MONO} style={{ pointerEvents: "none" }}>
+                {pct !== null ? pct : p.id}
+              </text>
+            </g>
+          );
+        })}
+      </svg>
+    </Glass>
   );
 }
 
-/* ─── Position info card ─── */
+/* ═══ POSITION CARD — exact from SVG ═══ */
 function PosCard({ pos, stat }) {
   if (!pos) return null;
   const total = stat.made + stat.missed;
   const pct = total > 0 ? Math.round((stat.made / total) * 100) : 0;
   return (
-    <Card>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
+    <Glass type="stats" style={{ padding: "14px 18px" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
         <div>
-          <div style={{ fontSize: 10, color: C.gray }}>ПОЗИЦИЯ {pos.id}</div>
-          <div style={{ fontSize: 14, fontWeight: 700, color: C.white }}>{pos.name}</div>
+          <div style={{ fontSize: 12, color: T.gray, fontFamily: SYS }}>Позицияя {pos.id}</div>
+          <div style={{ fontSize: 17, color: T.white, fontFamily: TITLE }}>{pos.name}</div>
         </div>
-        <div style={{ fontSize: 28, fontWeight: 900, fontFamily: MONO, color: pct >= 70 ? C.green : pct >= 40 ? C.orange : total > 0 ? C.red : C.gray }}>
-          {pct}<span style={{ fontSize: 13 }}>%</span>
+        <div style={{ fontSize: 34, fontFamily: MONO, fontWeight: 700, color: pct >= 70 ? T.green : pct >= 40 ? "#E8782A" : total > 0 ? T.red : T.gray }}>
+          {pct}<span style={{ fontSize: 16 }}>%</span>
         </div>
       </div>
-      <div style={{ display: "flex", gap: 6 }}>
-        {[{ v: stat.made, l: "попал", c: C.green }, { v: stat.missed, l: "мимо", c: C.red }, { v: total, l: "всего", c: C.white }].map((d, i) => (
-          <div key={i} style={{ flex: 1, background: C.bgLight, borderRadius: 10, padding: "6px 8px", textAlign: "center" }}>
-            <div style={{ fontSize: 18, fontWeight: 700, color: d.c, fontFamily: MONO }}>{d.v}</div>
-            <div style={{ fontSize: 9, color: C.gray }}>{d.l}</div>
+      <div style={{ display: "flex", gap: 10 }}>
+        {[{ v: stat.made, l: "попаданий", c: T.green }, { v: stat.missed, l: "промахов", c: T.red }, { v: total, l: "всего", c: T.white }].map((d, i) => (
+          <div key={i} style={{ flex: 1, border: `1px solid ${T.white}`, borderRadius: T.r.statBox, padding: "10px 8px", textAlign: "center" }}>
+            <div style={{ fontSize: 22, fontWeight: 700, color: d.c, fontFamily: MONO }}>{d.v}</div>
+            <div style={{ fontSize: 10, color: T.gray, fontFamily: SYS }}>{d.l}</div>
           </div>
         ))}
       </div>
-    </Card>
+    </Glass>
   );
 }
 
-
-/* ═══════════════════════════════════
-   TRAINING SCREEN
-   ═══════════════════════════════════ */
-function TrainingScreen({ onSaveSession }) {
+/* ═══ TRAINING SCREEN ═══ */
+function Training({ onSave }) {
   const [phase, setPhase] = useState("idle");
-  const [selectedPos, setSelectedPos] = useState(null);
-  const [stats, setStats] = useState(initStats);
+  const [timed, setTimed] = useState(false);
+  const [cdMin, setCdMin] = useState(5);
+  const [showTP, setShowTP] = useState(false);
+  const [sel, setSel] = useState(null);
+  const [stats, setStats] = useState(initS);
   const [timer, setTimer] = useState(0);
-  const [timerRunning, setTimerRunning] = useState(false);
-  const intervalRef = useRef(null);
+  const [running, setRunning] = useState(false);
+  const ref = useRef(null);
+  const sirenRef = useRef(false);
 
   useEffect(() => {
-    if (timerRunning) { intervalRef.current = setInterval(() => setTimer(t => t + 1), 1000); }
-    else clearInterval(intervalRef.current);
-    return () => clearInterval(intervalRef.current);
-  }, [timerRunning]);
+    if (running) {
+      ref.current = setInterval(() => setTimer(t => {
+        if (timed) { if (t <= 1) { setRunning(false); if (!sirenRef.current) { playSiren(); vib("heavy"); sirenRef.current = true; } return 0; } return t - 1; }
+        return t + 1;
+      }), 1000);
+    } else clearInterval(ref.current);
+    return () => clearInterval(ref.current);
+  }, [running, timed]);
 
-  const totalMade = Object.values(stats).reduce((a, b) => a + b.made, 0);
-  const totalMissed = Object.values(stats).reduce((a, b) => a + b.missed, 0);
-  const totalShots = totalMade + totalMissed;
-  const totalPct = totalShots > 0 ? Math.round((totalMade / totalShots) * 100) : 0;
+  const made = Object.values(stats).reduce((a, b) => a + b.made, 0);
+  const missed = Object.values(stats).reduce((a, b) => a + b.missed, 0);
+  const total = made + missed;
+  const pct = total > 0 ? Math.round((made / total) * 100) : 0;
 
-  const handleShot = (made) => {
-    if (!selectedPos || phase !== "active") return;
-    haptic(made ? "medium" : "light");
-    setStats(prev => ({ ...prev, [selectedPos]: { ...prev[selectedPos], made: prev[selectedPos].made + (made ? 1 : 0), missed: prev[selectedPos].missed + (made ? 0 : 1) } }));
-  };
+  const shot = (m) => { if (!sel || phase !== "active") return; vib(m ? "medium" : "light"); setStats(prev => ({ ...prev, [sel]: { ...prev[sel], made: prev[sel].made + (m ? 1 : 0), missed: prev[sel].missed + (m ? 0 : 1) } })); };
+  const start = (t) => { setTimed(t); sirenRef.current = false; setTimer(t ? cdMin * 60 : 0); setPhase("active"); setRunning(true); vib("heavy"); };
+  const finish = () => { setRunning(false); vib("heavy"); const el = timed ? cdMin * 60 - timer : timer; onSave?.({ type: "training", stats: { ...stats }, timer: el, totalMade: made, totalMissed: missed, totalPct: pct, date: Date.now() }); setPhase("summary"); };
+  const reset = () => { setPhase("idle"); setSel(null); setStats(initS()); setTimer(0); setShowTP(false); };
 
-  const startTraining = () => { setPhase("active"); setTimerRunning(true); haptic("heavy"); };
-  const finishTraining = () => {
-    setTimerRunning(false); haptic("heavy");
-    onSaveSession?.({ type: "training", stats: { ...stats }, timer, totalMade, totalMissed, totalPct, date: Date.now() });
-    setPhase("summary");
-  };
-  const resetTraining = () => { setPhase("idle"); setSelectedPos(null); setStats(initStats()); setTimer(0); };
+  const posData = P.find(p => p.id === sel);
 
   /* Summary */
   if (phase === "summary") {
-    const used = POSITIONS.filter(p => stats[p.id].made + stats[p.id].missed > 0);
+    const used = P.filter(p => stats[p.id].made + stats[p.id].missed > 0);
+    const el = timed ? cdMin * 60 - timer : timer;
     return (
       <div style={{ flex: 1, overflowY: "auto", padding: 16 }}>
-        <Card style={{ textAlign: "center", marginBottom: 16, background: C.dark, padding: 24 }}>
-          <div style={{ fontSize: 11, color: C.gray, textTransform: "uppercase", marginBottom: 4 }}>Тренировка завершена</div>
-          <div style={{ fontSize: 52, fontWeight: 900, fontFamily: MONO, color: C.white }}>{totalPct}<span style={{ fontSize: 20, opacity: 0.5 }}>%</span></div>
-          <div style={{ fontSize: 13, color: C.gray, marginBottom: 16 }}>{fmtTimeFull(timer)}</div>
+        <Glass type="timer" style={{ textAlign: "center", padding: 24, marginBottom: 14 }}>
+          <div style={{ fontSize: 12, color: T.gray, fontFamily: SYS, textTransform: "uppercase", marginBottom: 4 }}>Тренировка завершена</div>
+          <div style={{ fontSize: 52, fontFamily: MONO, fontWeight: 700, color: T.white }}>{pct}<span style={{ fontSize: 20, opacity: 0.5 }}>%</span></div>
+          <div style={{ fontSize: 13, color: T.gray, fontFamily: MONO, marginBottom: 16 }}>{fmtF(el)}</div>
           <div style={{ display: "flex", justifyContent: "center", gap: 24 }}>
-            {[{ v: totalMade, l: "попал", c: C.green }, { v: totalMissed, l: "мимо", c: C.redSoft }, { v: totalShots, l: "всего", c: C.white }].map((d, i) => (
-              <div key={i}><div style={{ fontSize: 22, fontWeight: 800, fontFamily: MONO, color: d.c }}>{d.v}</div><div style={{ fontSize: 10, color: C.gray }}>{d.l}</div></div>
+            {[{ v: made, l: "попал", c: T.green }, { v: missed, l: "мимо", c: T.red }, { v: total, l: "всего", c: T.white }].map((d, i) => (
+              <div key={i}><div style={{ fontSize: 22, fontWeight: 700, fontFamily: MONO, color: d.c }}>{d.v}</div><div style={{ fontSize: 10, color: T.gray, fontFamily: SYS }}>{d.l}</div></div>
             ))}
           </div>
-        </Card>
-        <Card style={{ marginBottom: 12, padding: 10 }}><CourtSVG stats={stats} selectedPos={null} onSelectPos={() => {}} disabled /></Card>
-        {used.length > 0 && (<div style={{ marginBottom: 12 }}><SectionLabel>По позициям</SectionLabel>
-          {used.map(p => { const s = stats[p.id], t = s.made + s.missed, pct = Math.round((s.made / t) * 100); return (
-            <div key={p.id} style={{ background: C.card, borderRadius: 12, padding: "10px 14px", marginBottom: 6, display: "flex", alignItems: "center", gap: 10 }}>
-              <div style={{ width: 32, height: 32, borderRadius: 8, background: pct >= 70 ? "rgba(91,191,61,0.15)" : pct >= 40 ? "rgba(232,120,42,0.15)" : "rgba(231,76,60,0.15)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 800, fontFamily: MONO, color: pct >= 70 ? C.green : pct >= 40 ? C.orange : C.red }}>{pct}</div>
-              <div style={{ flex: 1, fontSize: 13, fontWeight: 600, color: C.white }}>{p.name}</div>
-              <div style={{ fontSize: 12, fontFamily: MONO, color: C.white }}><span style={{ color: C.green }}>{s.made}</span>/{t}</div>
-            </div>); })}
-        </div>)}
-        <PressBtn full bg={C.green} onClick={resetTraining}>Новая тренировка</PressBtn>
+        </Glass>
+        <Court stats={stats} sel={null} onSel={() => {}} disabled />
+        <div style={{ marginTop: 10 }}>
+          {used.map(p => { const s = stats[p.id], t = s.made + s.missed, pc = Math.round((s.made / t) * 100); return (
+            <Glass key={p.id} type="stats" style={{ marginBottom: 6, padding: "10px 14px", display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ width: 32, height: 32, borderRadius: 8, background: pc >= 70 ? "rgba(0,152,23,0.2)" : "rgba(254,72,0,0.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 700, fontFamily: MONO, color: pc >= 70 ? T.green : T.red }}>{pc}</div>
+              <div style={{ flex: 1, fontSize: 13, fontWeight: 600, color: T.white, fontFamily: SYS }}>{p.name}</div>
+              <div style={{ fontSize: 12, fontFamily: MONO, color: T.white }}><span style={{ color: T.green }}>{s.made}</span>/{t}</div>
+            </Glass>); })}
+        </div>
+        <Btn full bg={T.green} onClick={reset} style={{ marginTop: 12 }}>Новая тренировка</Btn>
       </div>
     );
   }
 
   return (
     <div style={{ flex: 1, overflowY: "auto" }}>
+      {/* Timer bar — SVG exact: glass timer card */}
       {phase === "active" && (
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "8px 16px", background: C.dark }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <div style={{ fontSize: 24, fontWeight: 800, fontFamily: MONO, color: C.white }}>{fmtTimeFull(timer)}</div>
-            <div style={{ width: 8, height: 8, borderRadius: "50%", background: timerRunning ? C.green : C.gray, boxShadow: timerRunning ? `0 0 8px ${C.green}` : "none" }} />
-          </div>
-          <div style={{ display: "flex", gap: 6 }}>
-            <TapBtn onClick={() => setTimerRunning(!timerRunning)} bg={timerRunning ? "rgba(231,76,60,0.2)" : "rgba(91,191,61,0.2)"} color={timerRunning ? C.red : C.green}>
-              {timerRunning ? "⏸" : "▶"}
-            </TapBtn>
-            <TapBtn onClick={finishTraining} bg={C.red} color={C.pureWhite}>■ Стоп</TapBtn>
-          </div>
-        </div>
+        <Glass type="timer" style={{ margin: "0 16px 8px", padding: "14px 16px", display: "flex", alignItems: "center", gap: 8 }}>
+          <div style={{ flex: 1, fontSize: 30, fontWeight: 700, fontFamily: MONO, color: T.white }}>{fmtF(timer)}</div>
+          <Btn bg={T.redDark} onClick={() => setRunning(!running)} style={{ padding: "14px 22px", borderRadius: 12, fontSize: 22, lineHeight: 1 }}>
+            {running ? "⏸" : "▶"}
+          </Btn>
+          <Btn bg={T.red} onClick={finish} style={{ padding: "14px 22px", borderRadius: 12, fontSize: 22, lineHeight: 1 }}>■</Btn>
+        </Glass>
       )}
+
+      {/* Stats strip */}
       {phase === "active" && (
-        <div style={{ display: "flex", gap: 1, background: C.dark }}>
-          {[{ l: "Бросков", v: totalShots, c: C.white }, { l: "Попал", v: totalMade, c: C.green }, { l: "Мимо", v: totalMissed, c: C.red }, { l: "%", v: `${totalPct}`, c: totalPct >= 60 ? C.green : C.orange }].map((s, i) => (
-            <div key={i} style={{ flex: 1, background: C.card, padding: "8px 4px", textAlign: "center" }}>
-              <div style={{ fontSize: 18, fontWeight: 800, fontFamily: MONO, color: s.c }}>{s.v}</div>
-              <div style={{ fontSize: 9, color: C.gray, fontWeight: 600 }}>{s.l}</div>
+        <div style={{ display: "flex", padding: "0 16px 8px" }}>
+          {[{ l: "бросков", v: total, c: T.white }, { l: "попаданий", v: made, c: T.green }, { l: "промахов", v: missed, c: T.red }, { l: "промахов", v: `${pct}%`, c: T.white }].map((s, i) => (
+            <div key={i} style={{ flex: 1, textAlign: "center" }}>
+              <div style={{ fontSize: 18, fontWeight: 700, fontFamily: MONO, color: s.c }}>{s.v}</div>
+              <div style={{ fontSize: 9, color: T.gray, fontFamily: SYS }}>{s.l}</div>
             </div>
           ))}
         </div>
       )}
-      <div style={{ padding: "12px 16px 8px" }}><CourtSVG stats={stats} selectedPos={selectedPos} onSelectPos={setSelectedPos} /></div>
+
+      {/* Court */}
+      <div style={{ padding: "0 16px 8px" }}><Court stats={stats} sel={sel} onSel={setSel} /></div>
+
+      {/* Position + buttons */}
       <div style={{ padding: "0 16px 16px", display: "flex", flexDirection: "column", gap: 10 }}>
-        {selectedPos && <PosCard pos={POSITIONS.find(p => p.id === selectedPos)} stat={stats[selectedPos]} />}
-        {phase === "idle" && selectedPos && <PressBtn full bg={C.green} onClick={startTraining}>▶ Начать тренировку</PressBtn>}
-        {phase === "idle" && !selectedPos && (
-          <Card style={{ textAlign: "center", padding: "28px 20px", border: `1px dashed ${C.grayUltra}`, background: "transparent" }}>
-            <div style={{ fontSize: 28, marginBottom: 6 }}>👆</div>
-            <div style={{ fontSize: 15, fontWeight: 600, color: C.white }}>Выберите позицию</div>
-            <div style={{ fontSize: 12, color: C.gray, marginTop: 4 }}>Нажмите на точку на площадке</div>
-          </Card>
-        )}
-        {phase === "active" && selectedPos && (
+        {sel && <PosCard pos={posData} stat={stats[sel]} />}
+
+        {/* Idle + selected: two start buttons */}
+        {phase === "idle" && sel && !showTP && (
           <div style={{ display: "flex", gap: 10 }}>
-            <PressBtn full big bg={C.green} onClick={() => handleShot(true)}>✓ Попал</PressBtn>
-            <PressBtn full big bg={C.dark} onClick={() => handleShot(false)}>✕ Мимо</PressBtn>
+            <Btn full bg={T.green} onClick={() => start(false)} style={{ padding: "22px 12px", fontSize: 15, lineHeight: 1.3 }}>
+              Начать{"\n"}без времени
+            </Btn>
+            <Btn full bg="#3478F6" onClick={() => setShowTP(true)} style={{ padding: "22px 12px", fontSize: 15, lineHeight: 1.3 }}>
+              Начать{"\n"}на время
+            </Btn>
           </div>
         )}
-        {phase === "active" && !selectedPos && (
-          <Card style={{ textAlign: "center", background: "rgba(91,191,61,0.08)", border: "1px solid rgba(91,191,61,0.15)" }}>
-            <div style={{ fontSize: 13, color: C.green, fontWeight: 600 }}>Выберите позицию для бросков</div>
-          </Card>
+
+        {/* Time picker */}
+        {phase === "idle" && sel && showTP && (
+          <Glass type="stats" style={{ padding: 16 }}>
+            <Stepper label="Минут" value={cdMin} onChange={setCdMin} min={1} max={60} unit="мин" />
+            <div style={{ display: "flex", gap: 10, marginTop: 12 }}>
+              <SmBtn onClick={() => setShowTP(false)} color={T.gray} style={{ flex: 1 }}>Отмена</SmBtn>
+              <Btn full bg="#3478F6" onClick={() => start(true)} style={{ flex: 2, padding: "12px 16px", fontSize: 14 }}>▶ Старт ({cdMin} мин)</Btn>
+            </div>
+          </Glass>
+        )}
+
+        {/* Idle, no selection */}
+        {phase === "idle" && !sel && (
+          <div style={{ textAlign: "center", padding: "28px 20px", border: `1px dashed rgba(255,255,255,0.2)`, borderRadius: T.r.card }}>
+            <div style={{ fontSize: 28, marginBottom: 6 }}>👆</div>
+            <div style={{ fontSize: 15, fontWeight: 600, color: T.white, fontFamily: SYS }}>Выберите позицию</div>
+            <div style={{ fontSize: 12, color: T.gray, fontFamily: SYS, marginTop: 4 }}>Нажмите на точку на площадке</div>
+          </div>
+        )}
+
+        {/* Active: shot buttons — exact from SVG */}
+        {phase === "active" && sel && (
+          <div style={{ display: "flex", gap: 10 }}>
+            <Btn full bg={T.green} onClick={() => shot(true)} style={{ padding: "24px 20px", fontSize: 20, height: 66 }}>Попал</Btn>
+            <Btn full bg={T.black} onClick={() => shot(false)} style={{ padding: "24px 20px", fontSize: 20, height: 66 }}>Мимо</Btn>
+          </div>
+        )}
+
+        {phase === "active" && !sel && (
+          <div style={{ textAlign: "center", padding: 14, background: "rgba(0,152,23,0.08)", borderRadius: T.r.card, border: "1px solid rgba(0,152,23,0.15)" }}>
+            <div style={{ fontSize: 13, color: T.green, fontFamily: SYS }}>Выберите позицию для бросков</div>
+          </div>
         )}
       </div>
     </div>
   );
 }
 
+/* ═══ GAME SCREEN ═══ */
+function Game({ onSave }) {
+  const [step, setStep] = useState("mode");
+  const [tA, setTA] = useState({ name: "", score: 0 }); const [tB, setTB] = useState({ name: "", score: 0 });
+  const [q, setQ] = useState(4); const [qm, setQm] = useState(10); const [cq, setCq] = useState(1);
+  const [timer, setTimer] = useState(600); const [run, setRun] = useState(false); const [hist, setHist] = useState([]);
+  const [tt, setTt] = useState(() => ["","","",""].map(() => rName()));
+  const [br, setBr] = useState("olympic"); const [matches, setMatches] = useState([]); const [mi, setMi] = useState(0);
+  const [mA, setMA] = useState({ name: "", score: 0 }); const [mB, setMB] = useState({ name: "", score: 0 }); const [mH, setMH] = useState([]);
+  const ref = useRef(null);
 
-/* ═══════════════════════════════════
-   GAME SCREEN
-   ═══════════════════════════════════ */
-function GameScreen({ onSaveSession }) {
-  const [step, setStep] = useState("choose_mode");
-  const [teamA, setTeamA] = useState({ name: "", score: 0 });
-  const [teamB, setTeamB] = useState({ name: "", score: 0 });
-  const [quarters, setQuarters] = useState(4);
-  const [quarterMin, setQuarterMin] = useState(10);
-  const [currentQuarter, setCurrentQuarter] = useState(1);
-  const [timer, setTimer] = useState(600);
-  const [timerRunning, setTimerRunning] = useState(false);
-  const [history, setHistory] = useState([]);
-  const [tournamentTeams, setTournamentTeams] = useState(() => ["", "", "", ""].map(() => getRandomName()));
-  const [bracketType, setBracketType] = useState("olympic");
-  const [tournamentMatches, setTournamentMatches] = useState([]);
-  const [currentMatchIdx, setCurrentMatchIdx] = useState(0);
-  const [matchTeamA, setMatchTeamA] = useState({ name: "", score: 0 });
-  const [matchTeamB, setMatchTeamB] = useState({ name: "", score: 0 });
-  const [matchHistory, setMatchHistory] = useState([]);
-  const intervalRef = useRef(null);
-
-  // Init random team names
+  useEffect(() => { const [a, b] = rTeams(); setTA({ name: a, score: 0 }); setTB({ name: b, score: 0 }); }, []);
   useEffect(() => {
-    const [a, b] = getRandomTeams();
-    setTeamA({ name: a, score: 0 });
-    setTeamB({ name: b, score: 0 });
-  }, []);
+    if (run && timer > 0) { ref.current = setInterval(() => setTimer(t => { if (t <= 1) { setRun(false); playSiren(); return 0; } return t - 1; }), 1000); }
+    else clearInterval(ref.current); return () => clearInterval(ref.current);
+  }, [run, timer]);
 
-  useEffect(() => {
-    if (timerRunning && timer > 0) {
-      intervalRef.current = setInterval(() => setTimer(t => { if (t <= 1) { setTimerRunning(false); return 0; } return t - 1; }), 1000);
-    } else clearInterval(intervalRef.current);
-    return () => clearInterval(intervalRef.current);
-  }, [timerRunning, timer]);
-
-  const addScore = (team, pts) => {
-    haptic("medium");
-    const isMatch = step === "match_playing";
-    if (team === "a") (isMatch ? setMatchTeamA : setTeamA)(prev => ({ ...prev, score: prev.score + pts }));
-    else (isMatch ? setMatchTeamB : setTeamB)(prev => ({ ...prev, score: prev.score + pts }));
-    (isMatch ? setMatchHistory : setHistory)(prev => [...prev, { team, pts, quarter: currentQuarter, time: timer }]);
+  const add = (team, pts) => { vib("medium"); const isM = step === "mp";
+    if (team === "a") (isM ? setMA : setTA)(p => ({ ...p, score: p.score + pts }));
+    else (isM ? setMB : setTB)(p => ({ ...p, score: p.score + pts }));
+    (isM ? setMH : setHist)(p => [...p, { team, pts, q: cq }]);
   };
-
-  const undoLast = () => {
-    const isMatch = step === "match_playing";
-    const hist = isMatch ? matchHistory : history;
-    if (!hist.length) return;
-    haptic();
-    const last = hist[hist.length - 1];
-    const setter = last.team === "a" ? (isMatch ? setMatchTeamA : setTeamA) : (isMatch ? setMatchTeamB : setTeamB);
-    setter(prev => ({ ...prev, score: Math.max(0, prev.score - last.pts) }));
-    (isMatch ? setMatchHistory : setHistory)(prev => prev.slice(0, -1));
+  const undo = () => { const isM = step === "mp"; const h = isM ? mH : hist; if (!h.length) return; vib();
+    const l = h[h.length - 1];
+    (l.team === "a" ? (isM ? setMA : setTA) : (isM ? setMB : setTB))(p => ({ ...p, score: Math.max(0, p.score - l.pts) }));
+    (isM ? setMH : setHist)(p => p.slice(0, -1));
   };
-
-  const generateMatches = (teams, type) => {
-    const valid = teams.filter(t => t.trim());
-    if (type === "round_robin") {
-      const m = [];
-      for (let i = 0; i < valid.length; i++) for (let j = i + 1; j < valid.length; j++) m.push({ a: valid[i], b: valid[j], scoreA: 0, scoreB: 0, done: false });
-      return m;
-    }
-    const sh = [...valid].sort(() => Math.random() - 0.5);
-    const m = [];
-    for (let i = 0; i < sh.length - 1; i += 2) m.push({ a: sh[i], b: sh[i + 1], scoreA: 0, scoreB: 0, done: false, round: 1 });
-    if (sh.length % 2) m.push({ a: sh[sh.length - 1], b: "BYE", scoreA: 1, scoreB: 0, done: true, round: 1 });
-    return m;
+  const genM = (teams, type) => { const v = teams.filter(t => t.trim());
+    if (type === "round_robin") { const m = []; for (let i = 0; i < v.length; i++) for (let j = i + 1; j < v.length; j++) m.push({ a: v[i], b: v[j], sA: 0, sB: 0, done: false }); return m; }
+    const s = [...v].sort(() => Math.random() - 0.5); const m = [];
+    for (let i = 0; i < s.length - 1; i += 2) m.push({ a: s[i], b: s[i + 1], sA: 0, sB: 0, done: false, r: 1 });
+    if (s.length % 2) m.push({ a: s[s.length - 1], b: "BYE", sA: 1, sB: 0, done: true, r: 1 }); return m;
   };
-
-  const startMatch = (idx) => {
-    const m = tournamentMatches[idx];
-    setMatchTeamA({ name: m.a, score: 0 }); setMatchTeamB({ name: m.b, score: 0 });
-    setCurrentQuarter(1); setTimer(quarterMin * 60); setTimerRunning(false); setMatchHistory([]); setCurrentMatchIdx(idx); setStep("match_playing");
+  const startM = (i) => { const m = matches[i]; setMA({ name: m.a, score: 0 }); setMB({ name: m.b, score: 0 }); setCq(1); setTimer(qm * 60); setRun(false); setMH([]); setMi(i); setStep("mp"); };
+  const finishM = () => { setRun(false); vib("heavy"); const u = [...matches]; u[mi] = { ...u[mi], sA: mA.score, sB: mB.score, done: true };
+    if (br === "olympic") { const r = u[mi].r, rm = u.filter(m => m.r === r); if (rm.every(m => m.done) && rm.length > 1) { const w = rm.map(m => m.sA >= m.sB ? m.a : m.b); for (let i = 0; i < w.length - 1; i += 2) u.push({ a: w[i], b: w[i + 1], sA: 0, sB: 0, done: false, r: r + 1 }); if (w.length % 2) u.push({ a: w[w.length - 1], b: "BYE", sA: 1, sB: 0, done: true, r: r + 1 }); } }
+    setMatches(u); const ad = u.findIndex(m => !m.done) === -1;
+    if (ad) onSave?.({ type: "tournament", br, matches: u, teams: tt.filter(t => t.trim()), date: Date.now() });
+    setStep(ad ? "tr" : "ml");
   };
+  const fullR = () => { const [a, b] = rTeams(); setStep("mode"); setTA({ name: a, score: 0 }); setTB({ name: b, score: 0 }); setQ(4); setQm(10); setCq(1); setTimer(600); setRun(false); setHist([]); setTt(["","","",""].map(() => rName())); setBr("olympic"); setMatches([]); setMi(0); setMH([]); };
 
-  const finishMatch = () => {
-    setTimerRunning(false); haptic("heavy");
-    const updated = [...tournamentMatches];
-    updated[currentMatchIdx] = { ...updated[currentMatchIdx], scoreA: matchTeamA.score, scoreB: matchTeamB.score, done: true };
-    if (bracketType === "olympic") {
-      const r = updated[currentMatchIdx].round, rm = updated.filter(m => m.round === r);
-      if (rm.every(m => m.done) && rm.length > 1) {
-        const w = rm.map(m => m.scoreA >= m.scoreB ? m.a : m.b);
-        for (let i = 0; i < w.length - 1; i += 2) updated.push({ a: w[i], b: w[i + 1], scoreA: 0, scoreB: 0, done: false, round: r + 1 });
-        if (w.length % 2) updated.push({ a: w[w.length - 1], b: "BYE", scoreA: 1, scoreB: 0, done: true, round: r + 1 });
-      }
-    }
-    setTournamentMatches(updated);
-    const allDone = updated.findIndex(m => !m.done) === -1;
-    if (allDone) {
-      onSaveSession?.({ type: "tournament", bracketType, matches: updated, teams: tournamentTeams.filter(t => t.trim()), date: Date.now() });
-    }
-    setStep(allDone ? "tournament_results" : "match_list");
-  };
-
-  const fullReset = () => {
-    const [a, b] = getRandomTeams();
-    setStep("choose_mode"); setTeamA({ name: a, score: 0 }); setTeamB({ name: b, score: 0 });
-    setQuarters(4); setQuarterMin(10); setCurrentQuarter(1); setTimer(600); setTimerRunning(false); setHistory([]);
-    setTournamentTeams(["", "", "", ""].map(() => getRandomName())); setBracketType("olympic");
-    setTournamentMatches([]); setCurrentMatchIdx(0); setMatchHistory([]);
-  };
-
-  /* Scoreboard with BIG buttons */
-  const Scoreboard = ({ tA, tB }) => (
-    <div style={{ display: "flex", margin: "0 12px", borderRadius: 20, overflow: "hidden", background: C.card }}>
-      {[{ team: tA, key: "a" }, { team: tB, key: "b" }].map((item, i) => (
-        <div key={i} style={{ flex: 1, padding: "14px 8px", textAlign: "center", borderRight: i === 0 ? `1px solid ${C.bg}` : "none" }}>
-          <div style={{ fontSize: 11, color: C.gray, fontWeight: 600, marginBottom: 4, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{item.team.name}</div>
-          <div style={{ fontSize: 48, fontWeight: 900, fontFamily: MONO, color: C.white, lineHeight: 1, marginBottom: 12 }}>{item.team.score}</div>
-          <div style={{ display: "flex", gap: 6, justifyContent: "center" }}>
-            {[1, 2, 3].map(pts => (
-              <PressBtn key={pts} big bg={pts === 3 ? C.green : pts === 2 ? C.cardLight : C.bgLight} color={C.pureWhite}
-                onClick={() => addScore(item.key, pts)} style={{ width: 56, height: 56, padding: 0, borderRadius: 14, fontSize: 20 }}>
-                +{pts}
-              </PressBtn>
-            ))}
+  /* Score board — +1/+3 top gray, +2 big green */
+  const Board = ({ a, b }) => (
+    <div style={{ display: "flex", margin: "0 12px", gap: 10 }}>
+      {[{ t: a, k: "a" }, { t: b, k: "b" }].map((item, i) => (
+        <div key={i} style={{ flex: 1, textAlign: "center" }}>
+          <Glass type="court" style={{ padding: "14px 8px 10px", marginBottom: 8 }}>
+            <div style={{ fontSize: 11, color: T.gray, fontFamily: SYS, marginBottom: 4, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{item.t.name}</div>
+            <div style={{ fontSize: 52, fontWeight: 700, fontFamily: MONO, color: T.white, lineHeight: 1 }}>{item.t.score}</div>
+          </Glass>
+          <div style={{ display: "flex", gap: 6, marginBottom: 6 }}>
+            <Btn bg="#6B7B8D" onClick={() => add(item.k, 1)} style={{ flex: 1, height: 52, padding: 0, borderRadius: 14, fontSize: 20, fontFamily: MONO }}>+1</Btn>
+            <Btn bg="#6B7B8D" onClick={() => add(item.k, 3)} style={{ flex: 1, height: 52, padding: 0, borderRadius: 14, fontSize: 20, fontFamily: MONO }}>+3</Btn>
           </div>
+          <Btn full bg={T.green} onClick={() => add(item.k, 2)} style={{ height: 60, padding: 0, borderRadius: 16, fontSize: 24, fontFamily: MONO }}>+2</Btn>
         </div>
       ))}
     </div>
   );
-
-  /* Timer bar for game modes */
-  const TimerBar = ({ q, maxQ, onNext }) => (
+  const UndoBar = () => { const isM = step === "mp"; const h = isM ? mH : hist; if (!h.length) return null; const l = h[h.length - 1]; const tn = l.team === "a" ? (isM ? mA : tA).name : (isM ? mB : tB).name;
+    return <div style={{ textAlign: "center", padding: "8px 12px" }}><SmBtn onClick={undo} bg="rgba(255,255,255,0.06)" color={T.grayLight} style={{ fontSize: 12 }}>↩ Отменить +{l.pts} ({tn})</SmBtn></div>;
+  };
+  const TimerUI = ({ onNext }) => (
     <div style={{ textAlign: "center", padding: "10px 16px 8px" }}>
-      <div style={{ fontSize: 10, color: C.gray, fontWeight: 600, textTransform: "uppercase" }}>Четверть {q} из {maxQ}</div>
-      <div style={{ fontSize: 52, fontWeight: 900, fontFamily: MONO, color: C.white, lineHeight: 1 }}>{fmtTime(timer)}</div>
+      <div style={{ fontSize: 10, color: T.gray, fontFamily: SYS, textTransform: "uppercase" }}>Четверть {cq} из {q}</div>
+      <div style={{ fontSize: 52, fontWeight: 700, fontFamily: MONO, color: T.white, lineHeight: 1 }}>{fmt(timer)}</div>
       <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 10 }}>
-        <PressBtn bg={timerRunning ? C.red : C.green} onClick={() => { setTimerRunning(!timerRunning); haptic("medium"); }}>
-          {timerRunning ? "⏸ Пауза" : "▶ Старт"}
-        </PressBtn>
-        <PressBtn bg={C.cardLight} onClick={onNext}>{q < maxQ ? "След. →" : "Завершить"}</PressBtn>
+        <Btn bg={run ? T.red : T.green} onClick={() => { setRun(!run); vib("medium"); }} style={{ fontSize: 14 }}>{run ? "⏸ Пауза" : "▶ Старт"}</Btn>
+        <Btn bg="rgba(255,255,255,0.1)" onClick={onNext} style={{ fontSize: 14 }}>{cq < q ? "След. →" : "Завершить"}</Btn>
       </div>
     </div>
   );
 
-  /* Choose Mode */
-  if (step === "choose_mode") return (
-    <div style={{ flex: 1, overflowY: "auto", padding: "20px 16px" }}>
-      <div style={{ textAlign: "center", marginBottom: 28 }}>
-        <BballIcon size={56} active />
-        <div style={{ fontSize: 18, fontWeight: 800, color: C.white, marginTop: 12 }}>Выберите режим</div>
+  if (step === "mode") return <div style={{ flex: 1, overflowY: "auto", padding: "20px 16px" }}>
+    <div style={{ fontSize: 18, fontFamily: TITLE, color: T.white, textAlign: "center", marginBottom: 28 }}>Выберите режим</div>
+    {[{ id: "f", i: "🤝", t: "Товарищеская игра" }, { id: "t", i: "🏆", t: "Турнир" }].map(m => (
+      <Btn key={m.id} full bg="rgba(255,255,255,0.08)" onClick={() => setStep(m.id === "f" ? "ft" : "tt")} style={{ marginBottom: 10, textAlign: "left", display: "flex", alignItems: "center", gap: 14, padding: "18px 20px", fontFamily: SYS, fontSize: 15 }}>
+        <span style={{ fontSize: 28 }}>{m.i}</span>{m.t}
+      </Btn>))}
+  </div>;
+
+  if (step === "ft") return <div style={{ flex: 1, overflowY: "auto", padding: "20px 16px" }}>
+    <SmBtn onClick={() => setStep("mode")} bg="transparent" color={T.green} style={{ marginBottom: 16, padding: "4px 0" }}>← Назад</SmBtn>
+    {[{ t: tA, set: setTA, l: "Команда 1" }, { t: tB, set: setTB, l: "Команда 2" }].map((item, i) => (
+      <Glass key={i} type="stats" style={{ marginBottom: 10, padding: "12px 16px" }}>
+        <div style={{ fontSize: 11, color: T.gray, fontFamily: SYS, marginBottom: 6 }}>{item.l}</div>
+        <input value={item.t.name} onChange={e => item.set(p => ({ ...p, name: e.target.value }))} style={{ width: "100%", padding: "12px 14px", borderRadius: 10, border: "none", background: "rgba(255,255,255,0.1)", fontSize: 16, fontFamily: SYS, color: T.white, outline: "none", boxSizing: "border-box" }} />
+      </Glass>))}
+    <Btn full onClick={() => setStep("fs")} style={{ marginTop: 8 }}>Далее →</Btn>
+  </div>;
+
+  if (step === "fs") return <div style={{ flex: 1, overflowY: "auto", padding: "20px 16px" }}>
+    <SmBtn onClick={() => setStep("ft")} bg="transparent" color={T.green} style={{ marginBottom: 16, padding: "4px 0" }}>← Назад</SmBtn>
+    <div style={{ fontSize: 13, color: T.gray, textAlign: "center", marginBottom: 16, fontFamily: SYS }}>{tA.name} vs {tB.name}</div>
+    <Glass type="stats" style={{ padding: 16, marginBottom: 12 }}>
+      <Stepper label="Четвертей" value={q} onChange={setQ} min={1} max={8} />
+      <div style={{ height: 1, background: "rgba(255,255,255,0.1)", margin: "14px 0" }} />
+      <Stepper label="Минут" value={qm} onChange={setQm} min={1} max={30} unit="мин" />
+    </Glass>
+    <Btn full onClick={() => { setCq(1); setTimer(qm * 60); setTA(p => ({ ...p, score: 0 })); setTB(p => ({ ...p, score: 0 })); setHist([]); setStep("play"); }}>🏀 Начать</Btn>
+  </div>;
+
+  if (step === "play") return <div style={{ flex: 1, overflowY: "auto" }}>
+    <TimerUI onNext={() => { if (cq < q) { setCq(c => c + 1); setTimer(qm * 60); setRun(false); } else { setRun(false); vib("heavy"); onSave?.({ type: "friendly", teamA: { ...tA }, teamB: { ...tB }, date: Date.now() }); setStep("fin"); }}} />
+    <Board a={tA} b={tB} /><UndoBar />
+  </div>;
+
+  if (step === "fin") { const w = tA.score > tB.score ? tA : tB.score > tA.score ? tB : null; return <div style={{ flex: 1, overflowY: "auto", padding: "20px 16px" }}>
+    <Glass type="timer" style={{ textAlign: "center", padding: 24, marginBottom: 16 }}>
+      <div style={{ fontSize: 40, marginBottom: 8 }}>🏆</div>
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 20 }}>
+        <div><div style={{ fontSize: 11, color: T.gray, fontFamily: SYS }}>{tA.name}</div><div style={{ fontSize: 44, fontWeight: 700, fontFamily: MONO, color: T.white }}>{tA.score}</div></div>
+        <div style={{ fontSize: 18, color: T.gray }}>—</div>
+        <div><div style={{ fontSize: 11, color: T.gray, fontFamily: SYS }}>{tB.name}</div><div style={{ fontSize: 44, fontWeight: 700, fontFamily: MONO, color: T.white }}>{tB.score}</div></div>
       </div>
-      {[{ id: "friendly", icon: "🤝", title: "Товарищеская игра", desc: "Один матч" },
-        { id: "tournament", icon: "🏆", title: "Турнир", desc: "Жеребьёвка и финал" }].map(m => (
-        <PressBtn key={m.id} full bg={C.card} color={C.white} onClick={() => setStep(m.id === "friendly" ? "friendly_teams" : "tournament_teams")}
-          style={{ marginBottom: 10, textAlign: "left", display: "flex", alignItems: "center", gap: 14, padding: "18px 20px" }}>
-          <span style={{ fontSize: 28 }}>{m.icon}</span>
-          <div><div style={{ fontSize: 15, fontWeight: 700 }}>{m.title}</div><div style={{ fontSize: 12, color: C.gray, fontWeight: 400 }}>{m.desc}</div></div>
-        </PressBtn>
-      ))}
-    </div>
-  );
+      {w && <div style={{ marginTop: 10, fontSize: 14, color: T.green, fontFamily: TITLE }}>🎉 {w.name}</div>}
+    </Glass>
+    <Btn full bg="rgba(255,255,255,0.08)" onClick={fullR}>Новая игра</Btn>
+  </div>; }
 
-  /* Friendly Teams */
-  if (step === "friendly_teams") return (
-    <div style={{ flex: 1, overflowY: "auto", padding: "20px 16px" }}>
-      <TapBtn onClick={() => setStep("choose_mode")} bg="transparent" color={C.green} style={{ marginBottom: 16, padding: "4px 0" }}>← Назад</TapBtn>
-      <div style={{ fontSize: 18, fontWeight: 800, color: C.white, textAlign: "center", marginBottom: 20 }}>Команды</div>
-      {[{ t: teamA, set: setTeamA, l: "Команда 1" }, { t: teamB, set: setTeamB, l: "Команда 2" }].map((item, i) => (
-        <Card key={i} style={{ marginBottom: 10 }}>
-          <div style={{ fontSize: 11, color: C.gray, fontWeight: 600, marginBottom: 6 }}>{item.l}</div>
-          <input value={item.t.name} onChange={e => item.set(prev => ({ ...prev, name: e.target.value }))} style={{
-            width: "100%", padding: "12px 14px", borderRadius: 10, border: "none", background: C.bgLight,
-            fontSize: 16, fontWeight: 600, fontFamily: FONT, color: C.white, outline: "none", boxSizing: "border-box",
-          }} />
-        </Card>
-      ))}
-      <PressBtn full onClick={() => setStep("friendly_settings")} style={{ marginTop: 8 }}>Далее →</PressBtn>
-    </div>
-  );
-
-  /* Friendly Settings */
-  if (step === "friendly_settings") return (
-    <div style={{ flex: 1, overflowY: "auto", padding: "20px 16px" }}>
-      <TapBtn onClick={() => setStep("friendly_teams")} bg="transparent" color={C.green} style={{ marginBottom: 16, padding: "4px 0" }}>← Назад</TapBtn>
-      <div style={{ fontSize: 18, fontWeight: 800, color: C.white, textAlign: "center", marginBottom: 4 }}>Настройки</div>
-      <div style={{ fontSize: 13, color: C.gray, textAlign: "center", marginBottom: 20 }}>{teamA.name} vs {teamB.name}</div>
-      <Card style={{ marginBottom: 12 }}>
-        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-          <NumberStepper label="Четвертей" value={quarters} onChange={setQuarters} min={1} max={8} />
-          <div style={{ height: 1, background: C.grayUltra }} />
-          <NumberStepper label="Минут" value={quarterMin} onChange={setQuarterMin} min={1} max={30} unit="мин" />
-        </div>
-      </Card>
-      <PressBtn full onClick={() => { setCurrentQuarter(1); setTimer(quarterMin * 60); setTeamA(p => ({ ...p, score: 0 })); setTeamB(p => ({ ...p, score: 0 })); setHistory([]); setStep("playing"); }}>
-        🏀 Начать
-      </PressBtn>
-    </div>
-  );
-
-  /* Playing */
-  if (step === "playing") return (
-    <div style={{ flex: 1, overflowY: "auto" }}>
-      <TimerBar q={currentQuarter} maxQ={quarters} onNext={() => {
-        if (currentQuarter < quarters) { setCurrentQuarter(q => q + 1); setTimer(quarterMin * 60); setTimerRunning(false); }
-        else { setTimerRunning(false); haptic("heavy"); onSaveSession?.({ type: "friendly", teamA: { ...teamA }, teamB: { ...teamB }, date: Date.now() }); setStep("finished"); }
-      }} />
-      <Scoreboard tA={teamA} tB={teamB} />
-      <div style={{ textAlign: "center", padding: 10 }}>
-        {history.length > 0 && <TapBtn onClick={undoLast} bg="transparent" color={C.gray}>↩ Отменить</TapBtn>}
+  if (step === "tt") return <div style={{ flex: 1, overflowY: "auto", padding: "20px 16px" }}>
+    <SmBtn onClick={() => setStep("mode")} bg="transparent" color={T.green} style={{ marginBottom: 16, padding: "4px 0" }}>← Назад</SmBtn>
+    <div style={{ fontSize: 16, fontFamily: TITLE, color: T.white, textAlign: "center", marginBottom: 16 }}>Команды турнира</div>
+    {tt.map((t, i) => <Glass key={i} type="stats" style={{ marginBottom: 8, padding: "10px 14px" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+        <div style={{ width: 24, height: 24, borderRadius: 6, background: "rgba(255,255,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, fontWeight: 700, fontFamily: MONO, color: T.white }}>{i + 1}</div>
+        <input value={t} onChange={e => { const u = [...tt]; u[i] = e.target.value; setTt(u); }} style={{ flex: 1, padding: "10px 12px", borderRadius: 10, border: "none", background: "rgba(255,255,255,0.1)", fontSize: 14, fontFamily: SYS, color: T.white, outline: "none", boxSizing: "border-box" }} />
+        {tt.length > 3 && <SmBtn onClick={() => setTt(p => p.filter((_, j) => j !== i))} bg="rgba(254,72,0,0.15)" color={T.red} style={{ width: 24, height: 24, padding: 0, borderRadius: 6 }}>×</SmBtn>}
       </div>
+    </Glass>)}
+    {tt.length < 8 && <SmBtn onClick={() => setTt(p => [...p, rName()])} bg="transparent" color={T.green} style={{ width: "100%", padding: 12, border: "1px dashed rgba(255,255,255,0.2)", borderRadius: 12, marginBottom: 12 }}>+ Добавить</SmBtn>}
+    <Btn full disabled={tt.filter(t => t.trim()).length < 3} onClick={() => setStep("tb")}>Далее →</Btn>
+  </div>;
+
+  if (step === "tb") return <div style={{ flex: 1, overflowY: "auto", padding: "20px 16px" }}>
+    <SmBtn onClick={() => setStep("tt")} bg="transparent" color={T.green} style={{ marginBottom: 16, padding: "4px 0" }}>← Назад</SmBtn>
+    <div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
+      {[{ id: "olympic", i: "🏅", t: "Олимпийская" }, { id: "round_robin", i: "🔄", t: "Круговая" }].map(b => (
+        <Btn key={b.id} full bg={br === b.id ? T.green : "rgba(255,255,255,0.08)"} onClick={() => setBr(b.id)} style={{ padding: 14, textAlign: "center", fontSize: 14, fontFamily: SYS }}><span style={{ fontSize: 20 }}>{b.i}</span><br/>{b.t}</Btn>))}
     </div>
-  );
+    <Glass type="stats" style={{ padding: 16, marginBottom: 16 }}>
+      <Stepper label="Четвертей" value={q} onChange={setQ} min={1} max={8} />
+      <div style={{ height: 1, background: "rgba(255,255,255,0.1)", margin: "14px 0" }} />
+      <Stepper label="Минут" value={qm} onChange={setQm} min={1} max={30} unit="мин" />
+    </Glass>
+    <Btn full onClick={() => { setMatches(genM(tt, br)); setStep("ml"); }}>🏆 Начать турнир</Btn>
+  </div>;
 
-  /* Finished */
-  if (step === "finished") {
-    const winner = teamA.score > teamB.score ? teamA : teamB.score > teamA.score ? teamB : null;
-    return (
-      <div style={{ flex: 1, overflowY: "auto", padding: "20px 16px" }}>
-        <Card style={{ textAlign: "center", background: C.dark, padding: 24, marginBottom: 16 }}>
-          <div style={{ fontSize: 40, marginBottom: 8 }}>🏆</div>
-          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 20 }}>
-            <div><div style={{ fontSize: 11, color: C.gray }}>{teamA.name}</div><div style={{ fontSize: 44, fontWeight: 900, fontFamily: MONO, color: C.white }}>{teamA.score}</div></div>
-            <div style={{ fontSize: 18, color: C.gray }}>—</div>
-            <div><div style={{ fontSize: 11, color: C.gray }}>{teamB.name}</div><div style={{ fontSize: 44, fontWeight: 900, fontFamily: MONO, color: C.white }}>{teamB.score}</div></div>
-          </div>
-          {winner && <div style={{ marginTop: 10, fontSize: 14, color: C.green, fontWeight: 700 }}>🎉 {winner.name}</div>}
-        </Card>
-        <PressBtn full bg={C.card} onClick={fullReset}>Новая игра</PressBtn>
-      </div>
-    );
-  }
-
-  /* Tournament Teams */
-  if (step === "tournament_teams") return (
-    <div style={{ flex: 1, overflowY: "auto", padding: "20px 16px" }}>
-      <TapBtn onClick={() => setStep("choose_mode")} bg="transparent" color={C.green} style={{ marginBottom: 16, padding: "4px 0" }}>← Назад</TapBtn>
-      <div style={{ fontSize: 18, fontWeight: 800, color: C.white, textAlign: "center", marginBottom: 20 }}>Команды турнира</div>
-      {tournamentTeams.map((t, i) => (
-        <Card key={i} style={{ marginBottom: 8, padding: "10px 14px" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <div style={{ width: 26, height: 26, borderRadius: 7, background: C.bgLight, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, fontWeight: 800, fontFamily: MONO, color: C.white }}>{i + 1}</div>
-            <input value={t} onChange={e => { const u = [...tournamentTeams]; u[i] = e.target.value; setTournamentTeams(u); }}
-              style={{ flex: 1, padding: "10px 12px", borderRadius: 10, border: "none", background: C.bgLight, fontSize: 14, fontWeight: 600, fontFamily: FONT, color: C.white, outline: "none", boxSizing: "border-box" }} />
-            {tournamentTeams.length > 3 && (
-              <TapBtn onClick={() => setTournamentTeams(prev => prev.filter((_, j) => j !== i))} bg="rgba(231,76,60,0.15)" color={C.red} style={{ width: 26, height: 26, padding: 0, borderRadius: 7, fontSize: 14, display: "flex", alignItems: "center", justifyContent: "center" }}>×</TapBtn>
-            )}
-          </div>
-        </Card>
-      ))}
-      {tournamentTeams.length < 8 && (
-        <TapBtn onClick={() => setTournamentTeams(prev => [...prev, getRandomName()])} bg="transparent" color={C.green} style={{ width: "100%", padding: 12, border: `1px dashed ${C.grayUltra}`, borderRadius: 12, marginBottom: 12 }}>+ Добавить</TapBtn>
-      )}
-      <PressBtn full disabled={tournamentTeams.filter(t => t.trim()).length < 3} onClick={() => setStep("tournament_bracket")}>Далее →</PressBtn>
+  if (step === "ml") { const d = matches.filter(m => m.done).length; return <div style={{ flex: 1, overflowY: "auto", padding: "20px 16px" }}>
+    <div style={{ textAlign: "center", marginBottom: 12 }}>
+      <div style={{ fontSize: 16, fontFamily: TITLE, color: T.white }}>Матчи</div>
+      <div style={{ fontSize: 12, color: T.gray, fontFamily: SYS, marginTop: 4 }}>Нажмите на любой матч</div>
+      <div style={{ height: 4, borderRadius: 2, background: "rgba(255,255,255,0.1)", marginTop: 10, overflow: "hidden" }}><div style={{ height: "100%", width: `${(d / matches.length) * 100}%`, background: T.green, borderRadius: 2 }} /></div>
     </div>
-  );
-
-  /* Tournament Bracket */
-  if (step === "tournament_bracket") {
-    const valid = tournamentTeams.filter(t => t.trim());
-    const mc = bracketType === "round_robin" ? (valid.length * (valid.length - 1)) / 2 : valid.length - 1;
-    return (
-      <div style={{ flex: 1, overflowY: "auto", padding: "20px 16px" }}>
-        <TapBtn onClick={() => setStep("tournament_teams")} bg="transparent" color={C.green} style={{ marginBottom: 16, padding: "4px 0" }}>← Назад</TapBtn>
-        <div style={{ fontSize: 18, fontWeight: 800, color: C.white, textAlign: "center", marginBottom: 20 }}>Формат</div>
-        <div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
-          {[{ id: "olympic", icon: "🏅", t: "Олимпийская", d: "На вылет" }, { id: "round_robin", icon: "🔄", t: "Круговая", d: "Все со всеми" }].map(b => (
-            <PressBtn key={b.id} full bg={bracketType === b.id ? C.green : C.card} onClick={() => setBracketType(b.id)}
-              style={{ padding: "14px 10px", textAlign: "center", display: "block" }}>
-              <div style={{ fontSize: 22 }}>{b.icon}</div>
-              <div style={{ fontSize: 13, fontWeight: 700, marginTop: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 10, opacity: 0.7, fontWeight: 400 }}>{b.d}</div>
-            </PressBtn>
-          ))}
-        </div>
-        <Card style={{ marginBottom: 16 }}>
-          <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-            <NumberStepper label="Четвертей" value={quarters} onChange={setQuarters} min={1} max={8} />
-            <div style={{ height: 1, background: C.grayUltra }} />
-            <NumberStepper label="Минут" value={quarterMin} onChange={setQuarterMin} min={1} max={30} unit="мин" />
-          </div>
-        </Card>
-        <PressBtn full onClick={() => { setTournamentMatches(generateMatches(tournamentTeams, bracketType)); setStep("match_list"); }}>🏆 Начать турнир</PressBtn>
+    {matches.map((m, i) => <Glass key={i} type="stats" onClick={() => { if (!m.done) startM(i); }} style={{ marginBottom: 8, padding: "14px 14px", opacity: m.done ? 0.5 : 1, cursor: m.done ? "default" : "pointer", border: !m.done ? `1px solid ${T.green}` : "none" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, fontSize: 13, fontFamily: SYS }}>
+        <span style={{ fontWeight: 600, color: T.white, flex: 1, textAlign: "right" }}>{m.a}</span>
+        {m.done ? <span style={{ fontWeight: 700, fontFamily: MONO, color: T.white }}>{m.sA}:{m.sB}</span> : <span style={{ color: T.green, fontWeight: 600, fontSize: 11 }}>▶ ИГРАТЬ</span>}
+        <span style={{ fontWeight: 600, color: T.white, flex: 1 }}>{m.b}</span>
       </div>
-    );
-  }
+    </Glass>)}
+  </div>; }
 
-  /* Match List */
-  if (step === "match_list") {
-    const done = tournamentMatches.filter(m => m.done).length, next = tournamentMatches.findIndex(m => !m.done);
-    return (
-      <div style={{ flex: 1, overflowY: "auto", padding: "20px 16px" }}>
-        <div style={{ textAlign: "center", marginBottom: 16 }}>
-          <div style={{ fontSize: 18, fontWeight: 800, color: C.white }}>Матчи</div>
-          <div style={{ fontSize: 12, color: C.gray, marginTop: 4 }}>{done} / {tournamentMatches.length}</div>
-          <div style={{ height: 4, borderRadius: 2, background: C.card, marginTop: 10, overflow: "hidden" }}>
-            <div style={{ height: "100%", width: `${(done / tournamentMatches.length) * 100}%`, background: C.green, borderRadius: 2 }} />
-          </div>
-        </div>
-        {tournamentMatches.map((m, i) => (
-          <Card key={i} style={{ marginBottom: 8, opacity: m.done ? 0.6 : 1, padding: "12px 14px", border: i === next ? `2px solid ${C.green}` : "none" }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10 }}>
-              <span style={{ fontSize: 13, fontWeight: 700, color: C.white, flex: 1, textAlign: "right" }}>{m.a}</span>
-              {m.done ? <span style={{ fontSize: 16, fontWeight: 900, fontFamily: MONO, color: C.white, minWidth: 50, textAlign: "center" }}>{m.scoreA}:{m.scoreB}</span>
-                : <span style={{ fontSize: 13, color: C.gray, minWidth: 30, textAlign: "center" }}>vs</span>}
-              <span style={{ fontSize: 13, fontWeight: 700, color: C.white, flex: 1, textAlign: "left" }}>{m.b}</span>
-            </div>
-          </Card>
-        ))}
-        {next !== -1 && <PressBtn full onClick={() => startMatch(next)} style={{ marginTop: 8 }}>▶ Матч {next + 1}</PressBtn>}
-      </div>
-    );
-  }
+  if (step === "mp") return <div style={{ flex: 1, overflowY: "auto" }}>
+    <TimerUI onNext={() => { if (cq < q) { setCq(c => c + 1); setTimer(qm * 60); setRun(false); } else finishM(); }} />
+    <Board a={mA} b={mB} /><UndoBar />
+  </div>;
 
-  /* Match Playing */
-  if (step === "match_playing") return (
-    <div style={{ flex: 1, overflowY: "auto" }}>
-      <TimerBar q={currentQuarter} maxQ={quarters} onNext={() => {
-        if (currentQuarter < quarters) { setCurrentQuarter(q => q + 1); setTimer(quarterMin * 60); setTimerRunning(false); }
-        else finishMatch();
-      }} />
-      <Scoreboard tA={matchTeamA} tB={matchTeamB} />
-      <div style={{ textAlign: "center", padding: 10 }}>{matchHistory.length > 0 && <TapBtn onClick={undoLast} bg="transparent" color={C.gray}>↩ Отменить</TapBtn>}</div>
-    </div>
-  );
-
-  /* Tournament Results */
-  if (step === "tournament_results") {
-    const standings = {};
-    tournamentTeams.filter(t => t.trim()).forEach(t => { standings[t] = { w: 0, l: 0, scored: 0 }; });
-    tournamentMatches.filter(m => m.done && m.b !== "BYE").forEach(m => {
-      if (standings[m.a]) standings[m.a].scored += m.scoreA;
-      if (standings[m.b]) standings[m.b].scored += m.scoreB;
-      if (m.scoreA > m.scoreB) { if (standings[m.a]) standings[m.a].w++; if (standings[m.b]) standings[m.b].l++; }
-      else if (m.scoreB > m.scoreA) { if (standings[m.b]) standings[m.b].w++; if (standings[m.a]) standings[m.a].l++; }
-    });
-    const sorted = Object.entries(standings).sort((a, b) => b[1].w - a[1].w || b[1].scored - a[1].scored);
-    const medals = [C.gold, C.silver, C.bronze];
-    return (
-      <div style={{ flex: 1, overflowY: "auto", padding: "20px 16px" }}>
-        <div style={{ textAlign: "center", marginBottom: 16 }}><div style={{ fontSize: 40 }}>🏆</div><div style={{ fontSize: 18, fontWeight: 800, color: C.white }}>Итоги</div></div>
-        <Card style={{ marginBottom: 16, padding: 16 }}>
-          {sorted.map(([name, s], i) => (
-            <div key={name} style={{ display: "flex", alignItems: "center", gap: 10, padding: "8px 0", borderBottom: i < sorted.length - 1 ? `1px solid ${C.bgLight}` : "none" }}>
-              <div style={{ width: 24, height: 24, borderRadius: 6, background: i < 3 ? medals[i] : C.bgLight, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, fontWeight: 800, fontFamily: MONO, color: i < 3 ? C.dark : C.white }}>{i + 1}</div>
-              <div style={{ flex: 1, fontSize: 14, fontWeight: 600, color: C.white }}>{name}</div>
-              <div style={{ fontSize: 11, color: C.gray }}>{s.w}W–{s.l}L</div>
-              <div style={{ fontSize: 14, fontWeight: 800, fontFamily: MONO, color: C.white }}>{s.scored}</div>
-            </div>
-          ))}
-        </Card>
-        <SectionLabel>Матчи</SectionLabel>
-        {tournamentMatches.filter(m => m.done && m.b !== "BYE").map((m, i) => (
-          <Card key={i} style={{ marginBottom: 6, padding: "8px 12px" }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, fontSize: 13 }}>
-              <span style={{ fontWeight: 600, color: m.scoreA > m.scoreB ? C.green : C.white, flex: 1, textAlign: "right" }}>{m.a}</span>
-              <span style={{ fontWeight: 900, fontFamily: MONO, color: C.white }}>{m.scoreA}:{m.scoreB}</span>
-              <span style={{ fontWeight: 600, color: m.scoreB > m.scoreA ? C.green : C.white, flex: 1, textAlign: "left" }}>{m.b}</span>
-            </div>
-          </Card>
-        ))}
-        <PressBtn full bg={C.card} onClick={fullReset} style={{ marginTop: 12 }}>Новый турнир</PressBtn>
-      </div>
-    );
+  if (step === "tr") { const st = {}; tt.filter(t => t.trim()).forEach(t => { st[t] = { w: 0, l: 0, sc: 0 }; });
+    matches.filter(m => m.done && m.b !== "BYE").forEach(m => { if (st[m.a]) st[m.a].sc += m.sA; if (st[m.b]) st[m.b].sc += m.sB; if (m.sA > m.sB) { if (st[m.a]) st[m.a].w++; if (st[m.b]) st[m.b].l++; } else if (m.sB > m.sA) { if (st[m.b]) st[m.b].w++; if (st[m.a]) st[m.a].l++; } });
+    const sorted = Object.entries(st).sort((a, b) => b[1].w - a[1].w || b[1].sc - a[1].sc);
+    const mc = ["#F59E0B", "#94A3B8", "#C2855A"];
+    return <div style={{ flex: 1, overflowY: "auto", padding: "20px 16px" }}>
+      <div style={{ textAlign: "center", fontSize: 40, marginBottom: 8 }}>🏆</div>
+      <Glass type="stats" style={{ marginBottom: 16, padding: 16 }}>
+        {sorted.map(([n, s], i) => <div key={n} style={{ display: "flex", alignItems: "center", gap: 10, padding: "8px 0", borderBottom: i < sorted.length - 1 ? "1px solid rgba(255,255,255,0.1)" : "none" }}>
+          <div style={{ width: 22, height: 22, borderRadius: 6, background: i < 3 ? mc[i] : "rgba(255,255,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10, fontWeight: 700, fontFamily: MONO, color: i < 3 ? "#1A2A4D" : T.white }}>{i + 1}</div>
+          <div style={{ flex: 1, fontSize: 13, fontWeight: 600, color: T.white, fontFamily: SYS }}>{n}</div>
+          <div style={{ fontSize: 10, color: T.gray, fontFamily: SYS }}>{s.w}W–{s.l}L</div>
+          <div style={{ fontSize: 14, fontWeight: 700, fontFamily: MONO, color: T.white }}>{s.sc}</div>
+        </div>)}
+      </Glass>
+      <Btn full bg="rgba(255,255,255,0.08)" onClick={fullR}>Новый турнир</Btn>
+    </div>;
   }
   return null;
 }
 
-
-/* ═══════════════════════════════════
-   HISTORY SCREEN
-   ═══════════════════════════════════ */
-function HistoryScreen({ sessions }) {
-  if (!sessions.length) return (
-    <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", padding: 40 }}>
-      <BballIcon size={48} />
-      <div style={{ fontSize: 16, fontWeight: 700, color: C.white, marginTop: 16 }}>Пока пусто</div>
-      <div style={{ fontSize: 13, color: C.gray, marginTop: 4, textAlign: "center" }}>Завершите тренировку или матч — они появятся здесь</div>
-    </div>
-  );
-
-  const sorted = [...sessions].sort((a, b) => b.date - a.date);
-  return (
-    <div style={{ flex: 1, overflowY: "auto", padding: "12px 16px" }}>
-      {sorted.map((s, i) => {
-        const d = new Date(s.date);
-        const dateStr = d.toLocaleDateString("ru-RU", { day: "numeric", month: "short" });
-        const timeStr = d.toLocaleTimeString("ru-RU", { hour: "2-digit", minute: "2-digit" });
-
-        if (s.type === "training") {
-          return (
-            <Card key={i} style={{ marginBottom: 10 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
-                <div>
-                  <div style={{ fontSize: 14, fontWeight: 700, color: C.white }}>🏀 Тренировка</div>
-                  <div style={{ fontSize: 11, color: C.gray }}>{dateStr}, {timeStr} · {fmtTimeFull(s.timer)}</div>
-                </div>
-                <div style={{ fontSize: 24, fontWeight: 900, fontFamily: MONO, color: s.totalPct >= 60 ? C.green : C.orange }}>{s.totalPct}%</div>
-              </div>
-              <div style={{ display: "flex", gap: 6 }}>
-                {[{ v: s.totalMade, l: "попал", c: C.green }, { v: s.totalMissed, l: "мимо", c: C.red }, { v: s.totalMade + s.totalMissed, l: "всего", c: C.white }].map((d, j) => (
-                  <div key={j} style={{ flex: 1, background: C.bgLight, borderRadius: 8, padding: "5px 6px", textAlign: "center" }}>
-                    <div style={{ fontSize: 16, fontWeight: 700, fontFamily: MONO, color: d.c }}>{d.v}</div>
-                    <div style={{ fontSize: 9, color: C.gray }}>{d.l}</div>
-                  </div>
-                ))}
-              </div>
-            </Card>
-          );
-        }
-        if (s.type === "friendly") {
-          const winner = s.teamA.score > s.teamB.score ? s.teamA.name : s.teamB.score > s.teamA.score ? s.teamB.name : "Ничья";
-          return (
-            <Card key={i} style={{ marginBottom: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: C.white, marginBottom: 4 }}>🤝 Товарищеский матч</div>
-              <div style={{ fontSize: 11, color: C.gray, marginBottom: 8 }}>{dateStr}, {timeStr}</div>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 12 }}>
-                <span style={{ fontSize: 13, fontWeight: 600, color: C.white, flex: 1, textAlign: "right" }}>{s.teamA.name}</span>
-                <span style={{ fontSize: 20, fontWeight: 900, fontFamily: MONO, color: C.white }}>{s.teamA.score}:{s.teamB.score}</span>
-                <span style={{ fontSize: 13, fontWeight: 600, color: C.white, flex: 1, textAlign: "left" }}>{s.teamB.name}</span>
-              </div>
-              <div style={{ fontSize: 11, color: C.green, textAlign: "center", marginTop: 6 }}>🏆 {winner}</div>
-            </Card>
-          );
-        }
-        if (s.type === "tournament") {
-          return (
-            <Card key={i} style={{ marginBottom: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: C.white, marginBottom: 4 }}>🏆 Турнир ({s.bracketType === "olympic" ? "олимпийская" : "круговая"})</div>
-              <div style={{ fontSize: 11, color: C.gray, marginBottom: 8 }}>{dateStr}, {timeStr} · {s.teams.length} команд</div>
-              {s.matches.filter(m => m.done && m.b !== "BYE").map((m, j) => (
-                <div key={j} style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, padding: "3px 0", fontSize: 12 }}>
-                  <span style={{ color: m.scoreA > m.scoreB ? C.green : C.white, flex: 1, textAlign: "right", fontWeight: 600 }}>{m.a}</span>
-                  <span style={{ fontWeight: 900, fontFamily: MONO, color: C.white }}>{m.scoreA}:{m.scoreB}</span>
-                  <span style={{ color: m.scoreB > m.scoreA ? C.green : C.white, flex: 1, textAlign: "left", fontWeight: 600 }}>{m.b}</span>
-                </div>
-              ))}
-            </Card>
-          );
-        }
-        return null;
-      })}
-    </div>
-  );
+/* ═══ HISTORY ═══ */
+function History({ sessions }) {
+  if (!sessions.length) return <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", padding: 40 }}>
+    <div style={{ fontSize: 16, fontFamily: TITLE, color: T.white, marginTop: 16 }}>Пока пусто</div>
+    <div style={{ fontSize: 13, color: T.gray, fontFamily: SYS, marginTop: 4 }}>Завершите тренировку или матч</div>
+  </div>;
+  return <div style={{ flex: 1, overflowY: "auto", padding: "12px 16px" }}>
+    {[...sessions].sort((a, b) => b.date - a.date).map((s, i) => {
+      const d = new Date(s.date), ds = d.toLocaleDateString("ru-RU", { day: "numeric", month: "short" }), ts = d.toLocaleTimeString("ru-RU", { hour: "2-digit", minute: "2-digit" });
+      if (s.type === "training") return <Glass key={i} type="stats" style={{ marginBottom: 10, padding: "14px 16px" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+          <div><div style={{ fontSize: 14, fontWeight: 600, color: T.white, fontFamily: SYS }}>🏀 Тренировка</div><div style={{ fontSize: 11, color: T.gray, fontFamily: SYS }}>{ds}, {ts} · {fmtF(s.timer)}</div></div>
+          <div style={{ fontSize: 24, fontWeight: 700, fontFamily: MONO, color: s.totalPct >= 60 ? T.green : T.red }}>{s.totalPct}%</div>
+        </div>
+        <div style={{ display: "flex", gap: 6 }}>
+          {[{ v: s.totalMade, l: "попал", c: T.green }, { v: s.totalMissed, l: "мимо", c: T.red }, { v: s.totalMade + s.totalMissed, l: "всего", c: T.white }].map((d, j) => (
+            <div key={j} style={{ flex: 1, border: `1px solid rgba(255,255,255,0.2)`, borderRadius: T.r.statBox, padding: "5px 6px", textAlign: "center" }}>
+              <div style={{ fontSize: 16, fontWeight: 700, fontFamily: MONO, color: d.c }}>{d.v}</div><div style={{ fontSize: 9, color: T.gray, fontFamily: SYS }}>{d.l}</div>
+            </div>))}
+        </div>
+      </Glass>;
+      if (s.type === "friendly") return <Glass key={i} type="stats" style={{ marginBottom: 10, padding: "14px 16px" }}>
+        <div style={{ fontSize: 14, fontWeight: 600, color: T.white, fontFamily: SYS }}>🤝 Товарищеский</div>
+        <div style={{ fontSize: 11, color: T.gray, fontFamily: SYS, marginBottom: 8 }}>{ds}, {ts}</div>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 12 }}>
+          <span style={{ fontSize: 13, fontWeight: 600, color: T.white, flex: 1, textAlign: "right", fontFamily: SYS }}>{s.teamA.name}</span>
+          <span style={{ fontSize: 22, fontWeight: 700, fontFamily: MONO, color: T.white }}>{s.teamA.score}:{s.teamB.score}</span>
+          <span style={{ fontSize: 13, fontWeight: 600, color: T.white, flex: 1, fontFamily: SYS }}>{s.teamB.name}</span>
+        </div>
+      </Glass>;
+      if (s.type === "tournament") return <Glass key={i} type="stats" style={{ marginBottom: 10, padding: "14px 16px" }}>
+        <div style={{ fontSize: 14, fontWeight: 600, color: T.white, fontFamily: SYS }}>🏆 Турнир</div>
+        <div style={{ fontSize: 11, color: T.gray, fontFamily: SYS, marginBottom: 8 }}>{ds}, {ts} · {s.teams.length} команд</div>
+        {s.matches.filter(m => m.done && m.b !== "BYE").map((m, j) => <div key={j} style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, padding: "3px 0", fontSize: 12, fontFamily: SYS }}>
+          <span style={{ color: m.sA > m.sB ? T.green : T.white, flex: 1, textAlign: "right", fontWeight: 600 }}>{m.a}</span>
+          <span style={{ fontWeight: 700, fontFamily: MONO, color: T.white }}>{m.sA}:{m.sB}</span>
+          <span style={{ color: m.sB > m.sA ? T.green : T.white, flex: 1, fontWeight: 600 }}>{m.b}</span>
+        </div>)}
+      </Glass>;
+      return null;
+    })}
+  </div>;
 }
 
-
-/* ═══════════════════════════════════
-   PROFILE SCREEN
-   ═══════════════════════════════════ */
-function ProfileScreen({ sessions }) {
-  const trainings = sessions.filter(s => s.type === "training");
-  const games = sessions.filter(s => s.type === "friendly" || s.type === "tournament");
-  const avgPct = trainings.length > 0 ? Math.round(trainings.reduce((a, b) => a + b.totalPct, 0) / trainings.length) : 0;
-  return (
-    <div style={{ flex: 1, overflowY: "auto", padding: "20px 16px" }}>
-      <div style={{ textAlign: "center", marginBottom: 24 }}>
-        <div style={{ width: 80, height: 80, borderRadius: "50%", background: C.card, display: "inline-flex", alignItems: "center", justifyContent: "center", marginBottom: 12 }}>
-          <BballIcon size={40} active />
-        </div>
-        <div style={{ fontSize: 20, fontWeight: 800, color: C.white }}>Игрок</div>
+/* ═══ PROFILE ═══ */
+function Profile({ sessions }) {
+  const tr = sessions.filter(s => s.type === "training"), gm = sessions.filter(s => s.type !== "training");
+  const avg = tr.length ? Math.round(tr.reduce((a, b) => a + b.totalPct, 0) / tr.length) : 0;
+  return <div style={{ flex: 1, overflowY: "auto", padding: "20px 16px" }}>
+    <div style={{ textAlign: "center", marginBottom: 24 }}>
+      <div style={{ width: 80, height: 80, borderRadius: "50%", background: "rgba(255,255,255,0.08)", display: "inline-flex", alignItems: "center", justifyContent: "center", marginBottom: 12 }}>
+        <svg width="40" height="40" viewBox="0 0 32 32"><text x="16" y="23" textAnchor="middle" fontSize="20" fontWeight="900" fontFamily={MONO} fill={T.white}>23</text></svg>
       </div>
-      <Card style={{ marginBottom: 12 }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8 }}>
-          {[{ l: "Тренировок", v: trainings.length }, { l: "Игр", v: games.length }, { l: "Точность", v: `${avgPct}%` }].map((s, i) => (
-            <div key={i} style={{ textAlign: "center", padding: "8px 0" }}>
-              <div style={{ fontSize: 22, fontWeight: 800, fontFamily: MONO, color: C.white }}>{s.v}</div>
-              <div style={{ fontSize: 10, color: C.gray }}>{s.l}</div>
-            </div>
-          ))}
-        </div>
-      </Card>
-      <Card>
-        {["Настройки", "Экспорт данных", "О приложении"].map((label, i) => (
-          <div key={i} style={{ display: "flex", justifyContent: "space-between", padding: "14px 0", borderBottom: i < 2 ? `1px solid ${C.bgLight}` : "none", fontSize: 14, color: C.white, cursor: "pointer" }}>
-            <span>{label}</span><span style={{ color: C.gray }}>›</span>
-          </div>
-        ))}
-      </Card>
+      <div style={{ fontSize: 20, fontFamily: TITLE, color: T.white }}>Игрок</div>
     </div>
-  );
+    <Glass type="stats" style={{ marginBottom: 12, padding: 16 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8 }}>
+        {[{ l: "Тренировок", v: tr.length }, { l: "Игр", v: gm.length }, { l: "Точность", v: `${avg}%` }].map((s, i) => (
+          <div key={i} style={{ textAlign: "center", padding: "8px 0" }}>
+            <div style={{ fontSize: 22, fontWeight: 700, fontFamily: MONO, color: T.white }}>{s.v}</div>
+            <div style={{ fontSize: 10, color: T.gray, fontFamily: SYS }}>{s.l}</div>
+          </div>))}
+      </div>
+    </Glass>
+    <Glass type="stats" style={{ padding: 0, overflow: "hidden" }}>
+      {["Настройки", "Экспорт данных", "О приложении"].map((l, i) => (
+        <div key={i} style={{ display: "flex", justifyContent: "space-between", padding: "14px 18px", borderBottom: i < 2 ? "1px solid rgba(255,255,255,0.1)" : "none", fontSize: 14, color: T.white, fontFamily: SYS, cursor: "pointer" }}>
+          <span>{l}</span><span style={{ color: T.gray }}>›</span>
+        </div>))}
+    </Glass>
+  </div>;
 }
 
-
-/* ═══════════════════════════════════
-   MAIN SHELL
-   ═══════════════════════════════════ */
-function ShotTrackerApp() {
+/* ═══ APP ═══ */
+function App() {
   const [tab, setTab] = useState("training");
   const [sessions, setSessions] = useState([]);
-  const saveSession = useCallback((s) => setSessions(prev => [...prev, s]), []);
+  const save = useCallback(s => setSessions(p => [...p, s]), []);
+  const titles = { training: "Бросковая тренировка", game: "Бросковая тренировка", history: "История", profile: "Профиль" };
 
   return (
-    <div style={{
-      width: "100%", height: "100vh", height: "100dvh", maxWidth: 480, margin: "0 auto",
-      background: C.bg, fontFamily: FONT, display: "flex", flexDirection: "column", overflow: "hidden",
-    }}>
-      <div style={{ paddingTop: "env(safe-area-inset-top, 12px)", background: C.bg, flexShrink: 0 }} />
-      <div style={{ padding: "4px 20px 10px", background: C.bg, flexShrink: 0 }}>
-        <div style={{ fontSize: 28, fontWeight: 800, letterSpacing: "-0.02em", color: C.white }}>
-          {tab === "training" && "Тренировка"}
-          {tab === "game" && "Матч"}
-          {tab === "history" && "История"}
-          {tab === "profile" && "Профиль"}
-        </div>
+    <div style={{ width: "100%", height: "100vh", height: "100dvh", maxWidth: 480, margin: "0 auto", background: T.bg, display: "flex", flexDirection: "column", overflow: "hidden", position: "relative" }}>
+      {/* Background pattern (subtle) */}
+      <div style={{ position: "absolute", inset: 0, opacity: 0.03, backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 48px, rgba(255,255,255,0.3) 48px, rgba(255,255,255,0.3) 49px), repeating-linear-gradient(90deg, transparent, transparent 52px, rgba(255,255,255,0.3) 52px, rgba(255,255,255,0.3) 53px)", pointerEvents: "none", zIndex: 0 }} />
+
+      <div style={{ paddingTop: "env(safe-area-inset-top, 12px)", flexShrink: 0, position: "relative", zIndex: 1 }} />
+      <div style={{ padding: "4px 20px 8px", flexShrink: 0, position: "relative", zIndex: 1 }}>
+        <div style={{ fontSize: 22, color: T.white, fontFamily: TITLE }}>{titles[tab]}</div>
       </div>
-      <div style={{ flex: 1, overflowY: "auto", overflowX: "hidden", WebkitOverflowScrolling: "touch", display: "flex", flexDirection: "column" }}>
-        {tab === "training" && <TrainingScreen onSaveSession={saveSession} />}
-        {tab === "game" && <GameScreen onSaveSession={saveSession} />}
-        {tab === "history" && <HistoryScreen sessions={sessions} />}
-        {tab === "profile" && <ProfileScreen sessions={sessions} />}
+      <div style={{ flex: 1, overflowY: "auto", overflowX: "hidden", WebkitOverflowScrolling: "touch", display: "flex", flexDirection: "column", position: "relative", zIndex: 1 }}>
+        {tab === "training" && <Training onSave={save} />}
+        {tab === "game" && <Game onSave={save} />}
+        {tab === "history" && <History sessions={sessions} />}
+        {tab === "profile" && <Profile sessions={sessions} />}
       </div>
-      <div style={{ flexShrink: 0, background: C.dark, paddingBottom: "env(safe-area-inset-bottom, 0px)" }}>
+      <div style={{ flexShrink: 0, paddingBottom: "env(safe-area-inset-bottom, 8px)", position: "relative", zIndex: 1 }}>
         <TabBar active={tab} onTab={setTab} />
       </div>
     </div>
   );
 }
 
-ReactDOM.createRoot(document.getElementById("root")).render(<ShotTrackerApp />);
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 </script>
 <script>
-if("serviceWorker"in navigator){const c=`const C="shots-v2";const U=["./","https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js","https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js","https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"];self.addEventListener("install",e=>e.waitUntil(caches.open(C).then(c=>c.addAll(U)).then(()=>self.skipWaiting())));self.addEventListener("activate",e=>e.waitUntil(self.clients.claim()));self.addEventListener("fetch",e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).then(res=>{const cl=res.clone();caches.open(C).then(c=>c.put(e.request,cl));return res})))});`;navigator.serviceWorker.register(URL.createObjectURL(new Blob([c],{type:"application/javascript"})))}
+if("serviceWorker"in navigator){const c=`const C="shots-v4";const U=["./","https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js","https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js","https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"];self.addEventListener("install",e=>e.waitUntil(caches.open(C).then(c=>c.addAll(U)).then(()=>self.skipWaiting())));self.addEventListener("activate",e=>e.waitUntil(self.clients.claim()));self.addEventListener("fetch",e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).then(res=>{const cl=res.clone();caches.open(C).then(c=>c.put(e.request,cl));return res})))});`;navigator.serviceWorker.register(URL.createObjectURL(new Blob([c],{type:"application/javascript"})))}
 </script>
 </body>
 </html>
