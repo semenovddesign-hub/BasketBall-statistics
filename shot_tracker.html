@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no, maximum-scale=1">
+<title>Shot Tracker</title>
+
+<!-- PWA / iOS standalone -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Shot Tracker">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#F5F2EB">
+
+<!-- Inline manifest -->
+<link rel="manifest" href="data:application/json;base64,eyJuYW1lIjogIlNob3QgVHJhY2tlciIsICJzaG9ydF9uYW1lIjogIlNob3RUcmFja2VyIiwgImRlc2NyaXB0aW9uIjogIkJhc2tldGJhbGwgc2hvb3Rpbmcgc3RhdGlzdGljcyB0cmFja2VyIiwgInN0YXJ0X3VybCI6ICIuIiwgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsICJiYWNrZ3JvdW5kX2NvbG9yIjogIiNGNUYyRUIiLCAidGhlbWVfY29sb3IiOiAiIzVCQkYzRCIsICJpY29ucyI6IFt7InNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWwsPHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz48Y2lyY2xlIGN4PSc1MCcgY3k9JzUwJyByPSc0NScgZmlsbD0nJTIzNUJCRjNEJy8+PHRleHQgeD0nNTAnIHk9JzYyJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBmb250LXNpemU9JzQwJyBmaWxsPSd3aGl0ZSc+8J+PgDwvdGV4dD48L3N2Zz4iLCAic2l6ZXMiOiAiMTkyeDE5MiIsICJ0eXBlIjogImltYWdlL3N2Zyt4bWwifV19">
+
+<!-- App icon for iOS -->
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' rx='40' fill='%235BBF3D'/><text x='90' y='115' text-anchor='middle' font-size='80'>🏀</text></svg>">
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body, #root { width: 100%; min-height: 100vh; min-height: 100dvh; overflow: hidden; }
+  body { background: #F5F2EB; overscroll-behavior: none; -webkit-overflow-scrolling: touch; }
+  input { -webkit-appearance: none; appearance: none; }
+  button { -webkit-appearance: none; appearance: none; }
+</style>
+
+<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState, useEffect, useRef, useCallback, useMemo } = React;
+
+/* ─── palette & tokens ─── */
+const C = {
+  bg: "#F5F2EB",
+  card: "#FFFFFF",
+  cardAlt: "#F0EDE5",
+  dark: "#1A1A1A",
+  darkSoft: "#2C2C2C",
+  green: "#5BBF3D",
+  greenDark: "#3D8C28",
+  greenLight: "#8FDB6F",
+  red: "#E74C3C",
+  redSoft: "#FF6B6B",
+  orange: "#F39C12",
+  gray: "#999",
+  grayLight: "#CCC",
+  grayUltra: "#E8E5DD",
+  accent: "#5BBF3D",
+  white: "#FFFFFF",
+  blue: "#3B82F6",
+  gold: "#F59E0B",
+  silver: "#94A3B8",
+  bronze: "#C2855A",
+};
+
+const FONT = "'SF Pro Display', 'Helvetica Neue', -apple-system, sans-serif";
+const MONO = "'SF Mono', 'Menlo', 'Courier New', monospace";
+
+const POSITIONS = [
+  { id: 1, name: "Слева под кольцом", x: 38, y: 14, zone: "paint" },
+  { id: 2, name: "Справа под кольцом", x: 62, y: 14, zone: "paint" },
+  { id: 3, name: "Из под кольца правой", x: 56, y: 20, zone: "paint" },
+  { id: 4, name: "Из под кольца левой", x: 44, y: 20, zone: "paint" },
+  { id: 5, name: "Метр от кольца справа", x: 65, y: 24, zone: "mid" },
+  { id: 6, name: "Метр от кольца слева", x: 35, y: 24, zone: "mid" },
+  { id: 7, name: "Метр перед кольцом", x: 50, y: 28, zone: "mid" },
+  { id: 8, name: "Трапеция слева", x: 30, y: 38, zone: "mid" },
+  { id: 9, name: "Из центра трапеции", x: 50, y: 38, zone: "mid" },
+  { id: 10, name: "Трапеция справа", x: 70, y: 38, zone: "mid" },
+  { id: 11, name: "Между трапеция/3pt слева", x: 22, y: 48, zone: "mid" },
+  { id: 12, name: "Сторона трапеции слева", x: 35, y: 50, zone: "mid" },
+  { id: 13, name: "Штрафная", x: 50, y: 48, zone: "mid" },
+  { id: 14, name: "Сторона трапеции справа", x: 65, y: 50, zone: "mid" },
+  { id: 15, name: "Между трапеция/3pt справа", x: 78, y: 48, zone: "mid" },
+  { id: 16, name: "3pt с левого боку", x: 8, y: 55, zone: "three" },
+  { id: 17, name: "3pt с левой четверти", x: 20, y: 62, zone: "three" },
+  { id: 18, name: "3pt с центра", x: 50, y: 68, zone: "three" },
+  { id: 19, name: "3pt с правой четверти", x: 80, y: 62, zone: "three" },
+  { id: 20, name: "3pt с правого боку", x: 92, y: 55, zone: "three" },
+];
+
+function fmtTime(sec) {
+  const m = Math.floor(sec / 60);
+  const s = sec % 60;
+  return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+}
+function fmtTimeFull(sec) {
+  const h = Math.floor(sec / 3600);
+  const m = Math.floor((sec % 3600) / 60);
+  const s = sec % 60;
+  return `${h}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+}
+
+function initStats() {
+  const s = {};
+  POSITIONS.forEach(p => { s[p.id] = { made: 0, missed: 0, time: 0 }; });
+  return s;
+}
+
+/* ─── iOS Status Bar ─── */
+function StatusBar({ light }) {
+  return (
+    <div style={{
+      display: "flex", justifyContent: "space-between", alignItems: "center",
+      padding: "8px 20px 4px", fontSize: 12, fontWeight: 600,
+      color: light ? C.dark : C.white, fontFamily: FONT,
+    }}>
+      <span>9:41</span>
+      <div style={{ display: "flex", gap: 4, alignItems: "center" }}>
+        <svg width="16" height="12" viewBox="0 0 16 12"><rect x="0" y="4" width="3" height="8" rx="0.5" fill="currentColor" opacity="0.4"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="0.5" fill="currentColor" opacity="0.6"/><rect x="9" y="0.5" width="3" height="11.5" rx="0.5" fill="currentColor" opacity="0.8"/><rect x="13" y="0" width="3" height="12" rx="0.5" fill="currentColor"/></svg>
+        <svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 2C5.8 2 3.8 2.8 2.2 4.2L0.8 2.8C2.8 1 5.2 0 8 0s5.2 1 7.2 2.8L13.8 4.2C12.2 2.8 10.2 2 8 2z" fill="currentColor" opacity="0.4"/><path d="M8 5.5c-1.5 0-2.8.6-3.8 1.5L2.8 5.6C4.2 4.3 6 3.5 8 3.5s3.8.8 5.2 2.1L11.8 7c-1-1-2.3-1.5-3.8-1.5z" fill="currentColor" opacity="0.7"/><circle cx="8" cy="10" r="2" fill="currentColor"/></svg>
+        <div style={{ width: 24, height: 11, border: "1px solid currentColor", borderRadius: 3, position: "relative", opacity: 0.9 }}>
+          <div style={{ position: "absolute", top: 1.5, left: 1.5, width: 16, height: 6, borderRadius: 1.5, background: C.green }} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── Tab Bar ─── */
+function TabBar({ active, onTab }) {
+  const tabs = [
+    { id: "training", label: "Тренировка", icon: "🏀" },
+    { id: "game", label: "Игра", icon: "🏟️" },
+    { id: "stats", label: "Статистика", icon: "📊" },
+    { id: "profile", label: "Профиль", icon: "👤" },
+  ];
+  return (
+    <div style={{
+      display: "flex", justifyContent: "space-around",
+      background: C.white, borderTop: `1px solid ${C.grayUltra}`,
+      padding: "8px 0 4px",
+    }}>
+      {tabs.map(t => (
+        <button key={t.id} onClick={() => onTab(t.id)} style={{
+          background: "none", border: "none", display: "flex", flexDirection: "column",
+          alignItems: "center", gap: 2, cursor: "pointer", padding: "4px 12px", fontFamily: FONT,
+        }}>
+          <span style={{ fontSize: 22 }}>{t.icon}</span>
+          <span style={{ fontSize: 10, fontWeight: 600, color: active === t.id ? C.green : C.gray, letterSpacing: "0.02em" }}>{t.label}</span>
+        </button>
+      ))}
+    </div>
+  );
+}
+
+/* ─── Court SVG ─── */
+function CourtSVG({ stats, selectedPos, onSelectPos, compact, disabled }) {
+  const h = compact ? 260 : 300;
+  return (
+    <svg viewBox="0 0 100 78" style={{ width: "100%", height: h, display: "block", opacity: disabled ? 0.5 : 1 }}>
+      <rect x="0" y="0" width="100" height="78" rx="2" fill={C.cardAlt} stroke={C.grayLight} strokeWidth="0.4" />
+      <line x1="0" y1="76" x2="100" y2="76" stroke={C.grayLight} strokeWidth="0.3" />
+      <path d="M 7 70 L 7 42 Q 7 18 50 10 Q 93 18 93 42 L 93 70" fill="none" stroke={C.dark} strokeWidth="0.5" opacity="0.25" />
+      <rect x="31" y="0" width="38" height="48" fill="none" stroke={C.dark} strokeWidth="0.5" opacity="0.25" />
+      <circle cx="50" cy="48" r="12" fill="none" stroke={C.dark} strokeWidth="0.4" opacity="0.2" />
+      <rect x="40" y="0" width="20" height="16" fill="none" stroke={C.dark} strokeWidth="0.4" opacity="0.15" />
+      <circle cx="50" cy="5" r="1.8" fill="none" stroke={C.orange} strokeWidth="0.6" />
+      <line x1="44" y1="2" x2="56" y2="2" stroke={C.dark} strokeWidth="0.6" />
+      {POSITIONS.map(p => {
+        const s = stats[p.id] || { made: 0, missed: 0 };
+        const total = s.made + s.missed;
+        const pct = total > 0 ? Math.round((s.made / total) * 100) : null;
+        const isSelected = selectedPos === p.id;
+        const r = isSelected ? 4.2 : (total > 0 ? 3.2 : 2.4);
+        const dotColor = pct === null ? C.grayLight : pct >= 70 ? C.green : pct >= 40 ? C.orange : C.red;
+        return (
+          <g key={p.id} onClick={() => !disabled && onSelectPos(p.id)} style={{ cursor: disabled ? "default" : "pointer" }}>
+            {isSelected && <circle cx={p.x} cy={p.y} r={r + 2} fill={C.green} opacity="0.15" />}
+            <circle cx={p.x} cy={p.y} r={r} fill={isSelected ? C.green : dotColor}
+              stroke={isSelected ? C.greenDark : "rgba(0,0,0,0.1)"} strokeWidth={isSelected ? 0.6 : 0.3} />
+            {total > 0 && (
+              <text x={p.x} y={p.y + 1.2} textAnchor="middle" fontSize="3"
+                fontWeight="800" fill={C.white} fontFamily={MONO} style={{ pointerEvents: "none" }}>{pct}</text>
+            )}
+            {total === 0 && (
+              <text x={p.x} y={p.y + 1} textAnchor="middle" fontSize="2.8"
+                fontWeight="600" fill={C.gray} fontFamily={MONO} style={{ pointerEvents: "none" }}>{p.id}</text>
+            )}
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
+/* ─── Shared UI ─── */
+function Btn({ children, onClick, color, bg, full, disabled, small, style: sx }) {
+  return (
+    <button disabled={disabled} onClick={onClick} style={{
+      width: full ? "100%" : "auto", padding: small ? "10px 16px" : "16px 24px",
+      borderRadius: 14, border: "none",
+      background: disabled ? C.grayUltra : (bg || C.green),
+      color: disabled ? C.gray : (color || C.white),
+      fontFamily: FONT, fontSize: small ? 13 : 16, fontWeight: 700,
+      cursor: disabled ? "default" : "pointer", opacity: disabled ? 0.5 : 1,
+      transition: "all 0.15s",
+      boxShadow: disabled ? "none" : bg === C.dark ? "none" : "0 4px 16px rgba(91,191,61,0.2)",
+      ...sx,
+    }}>{children}</button>
+  );
+}
+
+function CardWrap({ children, style: sx }) {
+  return (
+    <div style={{ background: C.white, borderRadius: 16, padding: "16px 18px", border: `1px solid ${C.grayUltra}`, ...sx }}>
+      {children}
+    </div>
+  );
+}
+
+function SectionLabel({ children }) {
+  return <div style={{ fontSize: 11, color: C.gray, fontWeight: 600, marginBottom: 8, textTransform: "uppercase", letterSpacing: "0.04em" }}>{children}</div>;
+}
+
+function NumberStepper({ label, value, onChange, min = 1, max = 99, unit }) {
+  return (
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+      <span style={{ fontSize: 14, color: C.dark, fontWeight: 500 }}>{label}</span>
+      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+        <button onClick={() => onChange(Math.max(min, value - 1))} style={{
+          width: 32, height: 32, borderRadius: 10, border: `1px solid ${C.grayUltra}`,
+          background: C.cardAlt, color: C.dark, fontSize: 18, fontWeight: 600,
+          cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
+        }}>−</button>
+        <span style={{ fontSize: 18, fontWeight: 800, fontFamily: MONO, minWidth: 36, textAlign: "center", color: C.dark }}>{value}</span>
+        <button onClick={() => onChange(Math.min(max, value + 1))} style={{
+          width: 32, height: 32, borderRadius: 10, border: `1px solid ${C.grayUltra}`,
+          background: C.cardAlt, color: C.dark, fontSize: 18, fontWeight: 600,
+          cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
+        }}>+</button>
+        {unit && <span style={{ fontSize: 12, color: C.gray, marginLeft: 2 }}>{unit}</span>}
+      </div>
+    </div>
+  );
+}
+
+function PosStatsCard({ pos, stat }) {
+  if (!pos) return null;
+  const total = stat.made + stat.missed;
+  const pct = total > 0 ? Math.round((stat.made / total) * 100) : 0;
+  return (
+    <CardWrap>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 10 }}>
+        <div>
+          <div style={{ fontSize: 10, color: C.gray, fontWeight: 500 }}>ПОЗИЦИЯ {pos.id}</div>
+          <div style={{ fontSize: 14, fontWeight: 700, color: C.dark }}>{pos.name}</div>
+        </div>
+        <div style={{
+          fontSize: 26, fontWeight: 800, fontFamily: MONO, lineHeight: 1,
+          color: pct >= 70 ? C.green : pct >= 40 ? C.orange : total > 0 ? C.red : C.grayLight,
+        }}>{pct}<span style={{ fontSize: 13, fontWeight: 600 }}>%</span></div>
+      </div>
+      <div style={{ display: "flex", gap: 6 }}>
+        {[
+          { v: stat.made, l: "попал", c: C.green },
+          { v: stat.missed, l: "мимо", c: C.red },
+          { v: total, l: "всего", c: C.dark },
+        ].map((d, i) => (
+          <div key={i} style={{ flex: 1, background: C.cardAlt, borderRadius: 10, padding: "6px 8px", textAlign: "center" }}>
+            <div style={{ fontSize: 18, fontWeight: 700, color: d.c, fontFamily: MONO }}>{d.v}</div>
+            <div style={{ fontSize: 9, color: C.gray, fontWeight: 500 }}>{d.l}</div>
+          </div>
+        ))}
+      </div>
+    </CardWrap>
+  );
+}
+
+
+/* ═══════════════════════════════════════════
+   TRAINING SCREEN
+   idle → active → summary
+   ═══════════════════════════════════════════ */
+function TrainingScreen() {
+  const [phase, setPhase] = useState("idle");
+  const [selectedPos, setSelectedPos] = useState(null);
+  const [stats, setStats] = useState(initStats);
+  const [timer, setTimer] = useState(0);
+  const [timerRunning, setTimerRunning] = useState(false);
+  const [savedSessions, setSavedSessions] = useState([]);
+  const intervalRef = useRef(null);
+
+  useEffect(() => {
+    if (timerRunning) {
+      intervalRef.current = setInterval(() => setTimer(t => t + 1), 1000);
+    } else { clearInterval(intervalRef.current); }
+    return () => clearInterval(intervalRef.current);
+  }, [timerRunning]);
+
+  const totalMade = Object.values(stats).reduce((a, b) => a + b.made, 0);
+  const totalMissed = Object.values(stats).reduce((a, b) => a + b.missed, 0);
+  const totalShots = totalMade + totalMissed;
+  const totalPct = totalShots > 0 ? Math.round((totalMade / totalShots) * 100) : 0;
+
+  const handleShot = (made) => {
+    if (!selectedPos || phase !== "active") return;
+    setStats(prev => ({
+      ...prev,
+      [selectedPos]: {
+        ...prev[selectedPos],
+        made: prev[selectedPos].made + (made ? 1 : 0),
+        missed: prev[selectedPos].missed + (made ? 0 : 1),
+      }
+    }));
+  };
+
+  const startTraining = () => { setPhase("active"); setTimerRunning(true); };
+
+  const finishTraining = () => {
+    setTimerRunning(false);
+    setSavedSessions(prev => [...prev, { stats: { ...stats }, timer, totalMade, totalMissed, totalPct, date: new Date().toLocaleString("ru-RU") }]);
+    setPhase("summary");
+  };
+
+  const resetTraining = () => {
+    setPhase("idle"); setSelectedPos(null); setStats(initStats()); setTimer(0); setTimerRunning(false);
+  };
+
+  const selectedPosData = POSITIONS.find(p => p.id === selectedPos);
+
+  /* ── Summary ── */
+  if (phase === "summary") {
+    const usedPositions = POSITIONS.filter(p => stats[p.id].made + stats[p.id].missed > 0);
+    return (
+      <div style={{ flex: 1, overflowY: "auto", background: C.bg }}>
+        <div style={{
+          background: C.dark, margin: 16, borderRadius: 20, padding: "24px 20px",
+          textAlign: "center", color: C.white,
+        }}>
+          <div style={{ fontSize: 11, opacity: 0.5, fontWeight: 600, textTransform: "uppercase", marginBottom: 4 }}>Тренировка завершена</div>
+          <div style={{ fontSize: 48, fontWeight: 900, fontFamily: MONO, lineHeight: 1, marginBottom: 4 }}>
+            {totalPct}<span style={{ fontSize: 20, fontWeight: 600, opacity: 0.5 }}>%</span>
+          </div>
+          <div style={{ fontSize: 13, opacity: 0.6, marginBottom: 16 }}>точность за {fmtTimeFull(timer)}</div>
+          <div style={{ display: "flex", justifyContent: "center", gap: 28 }}>
+            {[
+              { v: totalMade, l: "попал", c: C.green },
+              { v: totalMissed, l: "мимо", c: C.redSoft },
+              { v: totalShots, l: "всего", c: C.white },
+            ].map((d, i) => (
+              <div key={i}>
+                <div style={{ fontSize: 24, fontWeight: 800, fontFamily: MONO, color: d.c }}>{d.v}</div>
+                <div style={{ fontSize: 10, opacity: 0.5 }}>{d.l}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div style={{ padding: "0 16px 8px" }}>
+          <CardWrap><CourtSVG stats={stats} selectedPos={null} onSelectPos={() => {}} compact disabled /></CardWrap>
+        </div>
+
+        <div style={{ padding: "8px 16px" }}>
+          <SectionLabel>Результаты по позициям</SectionLabel>
+          {usedPositions.map(p => {
+            const s = stats[p.id]; const total = s.made + s.missed;
+            const pct = Math.round((s.made / total) * 100);
+            return (
+              <div key={p.id} style={{
+                background: C.white, borderRadius: 12, padding: "10px 14px",
+                marginBottom: 6, border: `1px solid ${C.grayUltra}`,
+                display: "flex", alignItems: "center", gap: 10,
+              }}>
+                <div style={{
+                  width: 34, height: 34, borderRadius: 10,
+                  background: pct >= 70 ? "rgba(91,191,61,0.12)" : pct >= 40 ? "rgba(243,156,18,0.12)" : "rgba(231,76,60,0.12)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  fontSize: 13, fontWeight: 800, fontFamily: MONO,
+                  color: pct >= 70 ? C.green : pct >= 40 ? C.orange : C.red,
+                }}>{pct}</div>
+                <div style={{ flex: 1, fontSize: 13, fontWeight: 600, color: C.dark }}>{p.name}</div>
+                <div style={{ fontSize: 12, fontFamily: MONO, color: C.dark }}>
+                  <span style={{ color: C.green }}>{s.made}</span>/<span>{total}</span>
+                </div>
+              </div>
+            );
+          })}
+          {usedPositions.length === 0 && (
+            <div style={{ textAlign: "center", padding: 16, color: C.gray, fontSize: 13 }}>Нет данных — не было бросков</div>
+          )}
+        </div>
+        <div style={{ padding: "8px 16px 20px" }}>
+          <Btn full bg={C.green} onClick={resetTraining}>Новая тренировка</Btn>
+        </div>
+      </div>
+    );
+  }
+
+  /* ── Idle + Active ── */
+  return (
+    <div style={{ flex: 1, overflowY: "auto", background: C.bg }}>
+      {phase === "active" && (
+        <div style={{
+          display: "flex", alignItems: "center", justifyContent: "space-between",
+          padding: "8px 16px", background: C.white, borderBottom: `1px solid ${C.grayUltra}`,
+        }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <div style={{ fontSize: 26, fontWeight: 800, fontFamily: MONO, color: C.dark }}>{fmtTimeFull(timer)}</div>
+            <div style={{
+              width: 8, height: 8, borderRadius: "50%",
+              background: timerRunning ? C.green : C.grayLight,
+              boxShadow: timerRunning ? `0 0 8px ${C.green}` : "none",
+            }} />
+          </div>
+          <div style={{ display: "flex", gap: 6 }}>
+            <button onClick={() => setTimerRunning(!timerRunning)} style={{
+              padding: "7px 16px", borderRadius: 10,
+              background: timerRunning ? "rgba(231,76,60,0.1)" : "rgba(91,191,61,0.1)",
+              color: timerRunning ? C.red : C.green, border: "none", fontFamily: FONT,
+              fontSize: 12, fontWeight: 700, cursor: "pointer",
+            }}>{timerRunning ? "⏸ Пауза" : "▶ Дальше"}</button>
+            <button onClick={finishTraining} style={{
+              padding: "7px 14px", borderRadius: 10,
+              background: C.red, color: C.white, border: "none",
+              fontFamily: FONT, fontSize: 12, fontWeight: 700, cursor: "pointer",
+            }}>■ Завершить</button>
+          </div>
+        </div>
+      )}
+
+      {phase === "active" && (
+        <div style={{ display: "flex", gap: 1, background: C.grayUltra }}>
+          {[
+            { label: "Бросков", value: totalShots, color: C.dark },
+            { label: "Попал", value: totalMade, color: C.green },
+            { label: "Мимо", value: totalMissed, color: C.red },
+            { label: "Точность", value: `${totalPct}%`, color: totalPct >= 60 ? C.green : C.orange },
+          ].map((s, i) => (
+            <div key={i} style={{ flex: 1, background: C.white, padding: "8px 6px", textAlign: "center" }}>
+              <div style={{ fontSize: 20, fontWeight: 800, fontFamily: MONO, color: s.color }}>{s.value}</div>
+              <div style={{ fontSize: 9, color: C.gray, fontWeight: 600, textTransform: "uppercase" }}>{s.label}</div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div style={{ padding: "10px 16px 6px" }}>
+        <CourtSVG stats={stats} selectedPos={selectedPos} onSelectPos={setSelectedPos} />
+      </div>
+
+      <div style={{ padding: "0 16px 16px", display: "flex", flexDirection: "column", gap: 10 }}>
+        {selectedPos && <PosStatsCard pos={selectedPosData} stat={stats[selectedPos]} />}
+
+        {phase === "idle" && selectedPos && (
+          <Btn full bg={C.green} onClick={startTraining}>▶ Начать тренировку</Btn>
+        )}
+
+        {phase === "idle" && !selectedPos && (
+          <div style={{
+            background: C.white, borderRadius: 16, padding: "24px 20px",
+            textAlign: "center", border: `1px dashed ${C.grayLight}`,
+          }}>
+            <div style={{ fontSize: 28, marginBottom: 6 }}>👆</div>
+            <div style={{ fontSize: 15, fontWeight: 600, color: C.dark }}>Выберите позицию</div>
+            <div style={{ fontSize: 12, color: C.gray, marginTop: 4 }}>Нажмите на точку, затем начните тренировку</div>
+          </div>
+        )}
+
+        {phase === "active" && selectedPos && (
+          <div style={{ display: "flex", gap: 10 }}>
+            <button onClick={() => handleShot(true)} style={{
+              flex: 1, padding: "16px 0", borderRadius: 16,
+              background: C.green, color: C.white, fontFamily: FONT,
+              fontSize: 16, fontWeight: 700, border: "none", cursor: "pointer",
+              boxShadow: "0 4px 16px rgba(91,191,61,0.3)",
+            }}>✓ Попал</button>
+            <button onClick={() => handleShot(false)} style={{
+              flex: 1, padding: "16px 0", borderRadius: 16,
+              background: C.dark, color: C.white, fontFamily: FONT,
+              fontSize: 16, fontWeight: 700, border: "none", cursor: "pointer",
+            }}>✕ Мимо</button>
+          </div>
+        )}
+
+        {phase === "active" && !selectedPos && (
+          <div style={{
+            background: "rgba(91,191,61,0.08)", borderRadius: 14, padding: "14px 16px",
+            textAlign: "center", border: `1px solid rgba(91,191,61,0.15)`,
+          }}>
+            <div style={{ fontSize: 13, color: C.green, fontWeight: 600 }}>Тренировка идёт — выберите позицию</div>
+          </div>
+        )}
+
+        {savedSessions.length > 0 && phase === "idle" && (
+          <div style={{ marginTop: 4 }}>
+            <SectionLabel>Прошлые тренировки</SectionLabel>
+            {savedSessions.slice().reverse().slice(0, 3).map((ses, i) => (
+              <div key={i} style={{
+                background: C.white, borderRadius: 12, padding: "10px 14px",
+                marginBottom: 6, border: `1px solid ${C.grayUltra}`,
+                display: "flex", justifyContent: "space-between", alignItems: "center",
+              }}>
+                <div>
+                  <div style={{ fontSize: 13, fontWeight: 600, color: C.dark }}>{ses.date}</div>
+                  <div style={{ fontSize: 11, color: C.gray }}>{ses.totalMade + ses.totalMissed} бросков · {fmtTimeFull(ses.timer)}</div>
+                </div>
+                <div style={{ fontSize: 20, fontWeight: 800, fontFamily: MONO, color: ses.totalPct >= 60 ? C.green : C.orange }}>{ses.totalPct}%</div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+
+/* ═══════════════════════════════════════════
+   GAME SCREEN
+   ═══════════════════════════════════════════ */
+function GameScreen() {
+  const [step, setStep] = useState("choose_mode");
+  const [mode, setMode] = useState(null);
+
+  const [teamA, setTeamA] = useState({ name: "Команда A", score: 0 });
+  const [teamB, setTeamB] = useState({ name: "Команда B", score: 0 });
+  const [quarters, setQuarters] = useState(4);
+  const [quarterMin, setQuarterMin] = useState(10);
+  const [currentQuarter, setCurrentQuarter] = useState(1);
+  const [timer, setTimer] = useState(600);
+  const [timerRunning, setTimerRunning] = useState(false);
+  const [history, setHistory] = useState([]);
+
+  const [tournamentTeams, setTournamentTeams] = useState(["", "", "", ""]);
+  const [bracketType, setBracketType] = useState("olympic");
+  const [tournamentMatches, setTournamentMatches] = useState([]);
+  const [currentMatchIdx, setCurrentMatchIdx] = useState(0);
+  const [matchTeamA, setMatchTeamA] = useState({ name: "", score: 0 });
+  const [matchTeamB, setMatchTeamB] = useState({ name: "", score: 0 });
+  const [matchHistory, setMatchHistory] = useState([]);
+
+  const intervalRef = useRef(null);
+
+  useEffect(() => {
+    if (timerRunning && timer > 0) {
+      intervalRef.current = setInterval(() => {
+        setTimer(t => { if (t <= 1) { setTimerRunning(false); return 0; } return t - 1; });
+      }, 1000);
+    } else { clearInterval(intervalRef.current); }
+    return () => clearInterval(intervalRef.current);
+  }, [timerRunning, timer]);
+
+  const addScore = (team, pts) => {
+    if (step === "playing") {
+      if (team === "a") setTeamA(prev => ({ ...prev, score: prev.score + pts }));
+      else setTeamB(prev => ({ ...prev, score: prev.score + pts }));
+      setHistory(prev => [...prev, { team, pts, quarter: currentQuarter, time: timer }]);
+    } else if (step === "match_playing") {
+      if (team === "a") setMatchTeamA(prev => ({ ...prev, score: prev.score + pts }));
+      else setMatchTeamB(prev => ({ ...prev, score: prev.score + pts }));
+      setMatchHistory(prev => [...prev, { team, pts, quarter: currentQuarter, time: timer }]);
+    }
+  };
+
+  const undoLast = () => {
+    const hist = step === "match_playing" ? matchHistory : history;
+    const setHist = step === "match_playing" ? setMatchHistory : setHistory;
+    if (hist.length === 0) return;
+    const last = hist[hist.length - 1];
+    const setter = last.team === "a"
+      ? (step === "match_playing" ? setMatchTeamA : setTeamA)
+      : (step === "match_playing" ? setMatchTeamB : setTeamB);
+    setter(prev => ({ ...prev, score: Math.max(0, prev.score - last.pts) }));
+    setHist(prev => prev.slice(0, -1));
+  };
+
+  const generateMatches = (teams, type) => {
+    const valid = teams.filter(t => t.trim());
+    if (type === "round_robin") {
+      const m = [];
+      for (let i = 0; i < valid.length; i++)
+        for (let j = i + 1; j < valid.length; j++)
+          m.push({ a: valid[i], b: valid[j], scoreA: 0, scoreB: 0, done: false });
+      return m;
+    }
+    const shuffled = [...valid].sort(() => Math.random() - 0.5);
+    const m = [];
+    for (let i = 0; i < shuffled.length - 1; i += 2)
+      m.push({ a: shuffled[i], b: shuffled[i + 1], scoreA: 0, scoreB: 0, done: false, round: 1 });
+    if (shuffled.length % 2 !== 0)
+      m.push({ a: shuffled[shuffled.length - 1], b: "BYE", scoreA: 1, scoreB: 0, done: true, round: 1 });
+    return m;
+  };
+
+  const startMatch = (idx) => {
+    const m = tournamentMatches[idx];
+    setMatchTeamA({ name: m.a, score: 0 });
+    setMatchTeamB({ name: m.b, score: 0 });
+    setCurrentQuarter(1);
+    setTimer(quarterMin * 60);
+    setTimerRunning(false);
+    setMatchHistory([]);
+    setCurrentMatchIdx(idx);
+    setStep("match_playing");
+  };
+
+  const finishMatch = () => {
+    setTimerRunning(false);
+    const updated = [...tournamentMatches];
+    updated[currentMatchIdx] = { ...updated[currentMatchIdx], scoreA: matchTeamA.score, scoreB: matchTeamB.score, done: true };
+    if (bracketType === "olympic") {
+      const r = updated[currentMatchIdx].round;
+      const rm = updated.filter(m => m.round === r);
+      if (rm.every(m => m.done) && rm.length > 1) {
+        const w = rm.map(m => m.scoreA >= m.scoreB ? m.a : m.b);
+        for (let i = 0; i < w.length - 1; i += 2)
+          updated.push({ a: w[i], b: w[i + 1], scoreA: 0, scoreB: 0, done: false, round: r + 1 });
+        if (w.length % 2 !== 0)
+          updated.push({ a: w[w.length - 1], b: "BYE", scoreA: 1, scoreB: 0, done: true, round: r + 1 });
+      }
+    }
+    setTournamentMatches(updated);
+    setStep(updated.findIndex(m => !m.done) === -1 ? "tournament_results" : "match_list");
+  };
+
+  const fullReset = () => {
+    setMode(null); setStep("choose_mode");
+    setTeamA({ name: "Команда A", score: 0 }); setTeamB({ name: "Команда B", score: 0 });
+    setQuarters(4); setQuarterMin(10); setCurrentQuarter(1); setTimer(600);
+    setTimerRunning(false); setHistory([]);
+    setTournamentTeams(["", "", "", ""]); setBracketType("olympic");
+    setTournamentMatches([]); setCurrentMatchIdx(0); setMatchHistory([]);
+  };
+
+  const Scoreboard = ({ tA, tB }) => (
+    <div style={{
+      display: "flex", margin: "0 16px", borderRadius: 20, overflow: "hidden",
+      background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)",
+    }}>
+      {[{ team: tA, key: "a" }, { team: tB, key: "b" }].map((item, i) => (
+        <div key={i} style={{
+          flex: 1, padding: "14px 10px", textAlign: "center",
+          borderRight: i === 0 ? "1px solid rgba(255,255,255,0.08)" : "none",
+        }}>
+          <div style={{ fontSize: 11, color: C.gray, fontWeight: 600, marginBottom: 4, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{item.team.name}</div>
+          <div style={{ fontSize: 42, fontWeight: 900, fontFamily: MONO, color: C.white, lineHeight: 1, marginBottom: 10 }}>{item.team.score}</div>
+          <div style={{ display: "flex", gap: 5, justifyContent: "center" }}>
+            {[1, 2, 3].map(pts => (
+              <button key={pts} onClick={() => addScore(item.key, pts)} style={{
+                width: 44, height: 44, borderRadius: 12,
+                background: pts === 3 ? C.green : pts === 2 ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.06)",
+                color: C.white, border: "none", fontFamily: MONO, fontSize: 17, fontWeight: 800, cursor: "pointer",
+              }}>+{pts}</button>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+
+  /* ── Choose Mode ── */
+  if (step === "choose_mode") return (
+    <div style={{ flex: 1, overflowY: "auto", background: C.bg, padding: "20px 16px" }}>
+      <div style={{ textAlign: "center", marginBottom: 28 }}>
+        <div style={{ fontSize: 48, marginBottom: 8 }}>🏟️</div>
+        <div style={{ fontSize: 20, fontWeight: 800, color: C.dark }}>Выберите режим</div>
+      </div>
+      {[
+        { id: "friendly", icon: "🤝", title: "Товарищеская игра", desc: "Один матч между двумя командами" },
+        { id: "tournament", icon: "🏆", title: "Турнир", desc: "Несколько команд, жеребьёвка и финал" },
+      ].map(m => (
+        <button key={m.id} onClick={() => { setMode(m.id); setStep(m.id === "friendly" ? "friendly_teams" : "tournament_teams"); }} style={{
+          width: "100%", padding: "18px 20px", borderRadius: 16,
+          background: C.white, border: `1px solid ${C.grayUltra}`,
+          marginBottom: 10, cursor: "pointer", display: "flex", alignItems: "center", gap: 14, textAlign: "left",
+        }}>
+          <span style={{ fontSize: 32 }}>{m.icon}</span>
+          <div>
+            <div style={{ fontSize: 16, fontWeight: 700, color: C.dark, fontFamily: FONT }}>{m.title}</div>
+            <div style={{ fontSize: 12, color: C.gray, fontFamily: FONT }}>{m.desc}</div>
+          </div>
+        </button>
+      ))}
+    </div>
+  );
+
+  /* ── Friendly Teams ── */
+  if (step === "friendly_teams") return (
+    <div style={{ flex: 1, overflowY: "auto", background: C.bg, padding: "20px 16px" }}>
+      <button onClick={() => setStep("choose_mode")} style={{ background: "none", border: "none", color: C.green, fontSize: 14, fontWeight: 600, cursor: "pointer", marginBottom: 16, fontFamily: FONT }}>← Назад</button>
+      <div style={{ textAlign: "center", marginBottom: 20 }}>
+        <div style={{ fontSize: 20, fontWeight: 800, color: C.dark }}>Команды</div>
+      </div>
+      {[{ t: teamA, set: setTeamA, l: "Команда 1" }, { t: teamB, set: setTeamB, l: "Команда 2" }].map((item, i) => (
+        <CardWrap key={i} style={{ marginBottom: 10 }}>
+          <div style={{ fontSize: 11, color: C.gray, fontWeight: 600, marginBottom: 6, textTransform: "uppercase" }}>{item.l}</div>
+          <input value={item.t.name} onChange={e => item.set(prev => ({ ...prev, name: e.target.value }))} style={{
+            width: "100%", padding: "12px 14px", borderRadius: 10,
+            border: `1px solid ${C.grayUltra}`, background: C.cardAlt,
+            fontSize: 16, fontWeight: 600, fontFamily: FONT, color: C.dark, outline: "none", boxSizing: "border-box",
+          }} />
+        </CardWrap>
+      ))}
+      <Btn full onClick={() => setStep("friendly_settings")} style={{ marginTop: 8 }}>Далее →</Btn>
+    </div>
+  );
+
+  /* ── Friendly Settings ── */
+  if (step === "friendly_settings") return (
+    <div style={{ flex: 1, overflowY: "auto", background: C.bg, padding: "20px 16px" }}>
+      <button onClick={() => setStep("friendly_teams")} style={{ background: "none", border: "none", color: C.green, fontSize: 14, fontWeight: 600, cursor: "pointer", marginBottom: 16, fontFamily: FONT }}>← Назад</button>
+      <div style={{ textAlign: "center", marginBottom: 20 }}>
+        <div style={{ fontSize: 20, fontWeight: 800, color: C.dark }}>Настройки матча</div>
+        <div style={{ fontSize: 13, color: C.gray, marginTop: 4 }}>{teamA.name} vs {teamB.name}</div>
+      </div>
+      <CardWrap style={{ marginBottom: 12 }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+          <NumberStepper label="Количество четвертей" value={quarters} onChange={setQuarters} min={1} max={8} />
+          <div style={{ height: 1, background: C.grayUltra }} />
+          <NumberStepper label="Минут в четверти" value={quarterMin} onChange={setQuarterMin} min={1} max={30} unit="мин" />
+        </div>
+      </CardWrap>
+      <CardWrap style={{ marginBottom: 16 }}>
+        <div style={{ fontSize: 12, color: C.gray, textAlign: "center" }}>
+          Общее время: <span style={{ fontWeight: 700, color: C.dark, fontFamily: MONO }}>{quarters * quarterMin} мин</span>
+        </div>
+      </CardWrap>
+      <Btn full onClick={() => {
+        setCurrentQuarter(1); setTimer(quarterMin * 60);
+        setTeamA(prev => ({ ...prev, score: 0 })); setTeamB(prev => ({ ...prev, score: 0 }));
+        setHistory([]); setStep("playing");
+      }}>🏀 Начать игру</Btn>
+    </div>
+  );
+
+  /* ── Playing (Friendly) ── */
+  if (step === "playing") return (
+    <div style={{ flex: 1, overflowY: "auto", background: C.dark }}>
+      <div style={{ textAlign: "center", padding: "12px 16px 10px" }}>
+        <div style={{ fontSize: 11, color: C.gray, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em" }}>Четверть {currentQuarter} из {quarters}</div>
+        <div style={{ fontSize: 52, fontWeight: 900, fontFamily: MONO, color: C.white, lineHeight: 1 }}>{fmtTime(timer)}</div>
+        <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 10 }}>
+          <button onClick={() => setTimerRunning(!timerRunning)} style={{
+            padding: "9px 28px", borderRadius: 12, background: timerRunning ? C.red : C.green,
+            color: C.white, border: "none", fontFamily: FONT, fontSize: 14, fontWeight: 700, cursor: "pointer",
+          }}>{timerRunning ? "⏸ Пауза" : "▶ Старт"}</button>
+          <button onClick={() => {
+            if (currentQuarter < quarters) { setCurrentQuarter(q => q + 1); setTimer(quarterMin * 60); setTimerRunning(false); }
+            else { setTimerRunning(false); setStep("finished"); }
+          }} style={{
+            padding: "9px 18px", borderRadius: 12, background: "rgba(255,255,255,0.1)", color: C.white,
+            border: "none", fontFamily: FONT, fontSize: 14, fontWeight: 600, cursor: "pointer",
+          }}>{currentQuarter < quarters ? "След. →" : "Завершить"}</button>
+        </div>
+      </div>
+      <Scoreboard tA={teamA} tB={teamB} />
+      <div style={{ textAlign: "center", padding: 10 }}>
+        {history.length > 0 && (
+          <button onClick={undoLast} style={{ padding: "7px 18px", borderRadius: 10, background: "rgba(255,255,255,0.06)", color: C.gray, border: "none", fontFamily: FONT, fontSize: 12, fontWeight: 600, cursor: "pointer" }}>↩ Отменить</button>
+        )}
+      </div>
+    </div>
+  );
+
+  /* ── Finished (Friendly) ── */
+  if (step === "finished") {
+    const winner = teamA.score > teamB.score ? teamA : teamB.score > teamA.score ? teamB : null;
+    return (
+      <div style={{ flex: 1, overflowY: "auto", background: C.bg, padding: "20px 16px" }}>
+        <div style={{ textAlign: "center", marginBottom: 20 }}>
+          <div style={{ fontSize: 48, marginBottom: 4 }}>🏆</div>
+          <div style={{ fontSize: 20, fontWeight: 800, color: C.dark }}>Игра завершена</div>
+        </div>
+        <div style={{ background: C.dark, borderRadius: 20, padding: "24px 20px", textAlign: "center", marginBottom: 16, color: C.white }}>
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 20 }}>
+            <div>
+              <div style={{ fontSize: 11, opacity: 0.6, marginBottom: 4 }}>{teamA.name}</div>
+              <div style={{ fontSize: 44, fontWeight: 900, fontFamily: MONO }}>{teamA.score}</div>
+            </div>
+            <div style={{ fontSize: 18, opacity: 0.3 }}>—</div>
+            <div>
+              <div style={{ fontSize: 11, opacity: 0.6, marginBottom: 4 }}>{teamB.name}</div>
+              <div style={{ fontSize: 44, fontWeight: 900, fontFamily: MONO }}>{teamB.score}</div>
+            </div>
+          </div>
+          {winner && <div style={{ marginTop: 10, fontSize: 14, color: C.green, fontWeight: 700 }}>🎉 {winner.name}</div>}
+          {!winner && <div style={{ marginTop: 10, fontSize: 14, color: C.orange, fontWeight: 700 }}>Ничья</div>}
+        </div>
+        <Btn full bg={C.dark} color={C.white} onClick={fullReset}>Новая игра</Btn>
+      </div>
+    );
+  }
+
+  /* ── Tournament Teams ── */
+  if (step === "tournament_teams") return (
+    <div style={{ flex: 1, overflowY: "auto", background: C.bg, padding: "20px 16px" }}>
+      <button onClick={() => setStep("choose_mode")} style={{ background: "none", border: "none", color: C.green, fontSize: 14, fontWeight: 600, cursor: "pointer", marginBottom: 16, fontFamily: FONT }}>← Назад</button>
+      <div style={{ textAlign: "center", marginBottom: 20 }}>
+        <div style={{ fontSize: 20, fontWeight: 800, color: C.dark }}>Команды турнира</div>
+        <div style={{ fontSize: 12, color: C.gray, marginTop: 4 }}>Минимум 3 команды</div>
+      </div>
+      {tournamentTeams.map((t, i) => (
+        <CardWrap key={i} style={{ marginBottom: 8 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <div style={{
+              width: 28, height: 28, borderRadius: 8, background: C.cardAlt,
+              display: "flex", alignItems: "center", justifyContent: "center",
+              fontSize: 12, fontWeight: 800, fontFamily: MONO, color: C.dark, flexShrink: 0,
+            }}>{i + 1}</div>
+            <input value={t} onChange={e => { const u = [...tournamentTeams]; u[i] = e.target.value; setTournamentTeams(u); }}
+              placeholder={`Команда ${i + 1}`} style={{
+                flex: 1, padding: "10px 12px", borderRadius: 10,
+                border: `1px solid ${C.grayUltra}`, background: C.cardAlt,
+                fontSize: 14, fontWeight: 600, fontFamily: FONT, color: C.dark, outline: "none", boxSizing: "border-box",
+              }} />
+            {tournamentTeams.length > 3 && (
+              <button onClick={() => setTournamentTeams(prev => prev.filter((_, j) => j !== i))} style={{
+                width: 28, height: 28, borderRadius: 8, background: "rgba(231,76,60,0.1)",
+                border: "none", color: C.red, fontSize: 16, cursor: "pointer",
+                display: "flex", alignItems: "center", justifyContent: "center",
+              }}>×</button>
+            )}
+          </div>
+        </CardWrap>
+      ))}
+      {tournamentTeams.length < 8 && (
+        <button onClick={() => setTournamentTeams(prev => [...prev, ""])} style={{
+          width: "100%", padding: "12px", borderRadius: 12,
+          border: `1px dashed ${C.grayLight}`, background: "transparent",
+          color: C.green, fontFamily: FONT, fontSize: 13, fontWeight: 600, cursor: "pointer", marginBottom: 12,
+        }}>+ Добавить команду</button>
+      )}
+      <Btn full disabled={tournamentTeams.filter(t => t.trim()).length < 3} onClick={() => setStep("tournament_bracket")}>Далее →</Btn>
+    </div>
+  );
+
+  /* ── Tournament Bracket ── */
+  if (step === "tournament_bracket") {
+    const valid = tournamentTeams.filter(t => t.trim());
+    const mc = bracketType === "round_robin" ? (valid.length * (valid.length - 1)) / 2 : valid.length - 1;
+    return (
+      <div style={{ flex: 1, overflowY: "auto", background: C.bg, padding: "20px 16px" }}>
+        <button onClick={() => setStep("tournament_teams")} style={{ background: "none", border: "none", color: C.green, fontSize: 14, fontWeight: 600, cursor: "pointer", marginBottom: 16, fontFamily: FONT }}>← Назад</button>
+        <div style={{ textAlign: "center", marginBottom: 20 }}>
+          <div style={{ fontSize: 20, fontWeight: 800, color: C.dark }}>Формат турнира</div>
+          <div style={{ fontSize: 12, color: C.gray, marginTop: 4 }}>{valid.length} команд</div>
+        </div>
+        <SectionLabel>Тип жеребьёвки</SectionLabel>
+        <div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
+          {[
+            { id: "olympic", icon: "🏅", title: "Олимпийская", desc: "На вылет" },
+            { id: "round_robin", icon: "🔄", title: "Круговая", desc: "Каждый с каждым" },
+          ].map(b => (
+            <button key={b.id} onClick={() => setBracketType(b.id)} style={{
+              flex: 1, padding: "14px 12px", borderRadius: 14,
+              background: bracketType === b.id ? "rgba(91,191,61,0.08)" : C.white,
+              border: bracketType === b.id ? `2px solid ${C.green}` : `1px solid ${C.grayUltra}`,
+              cursor: "pointer", textAlign: "center",
+            }}>
+              <div style={{ fontSize: 24, marginBottom: 4 }}>{b.icon}</div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: bracketType === b.id ? C.green : C.dark, fontFamily: FONT }}>{b.title}</div>
+              <div style={{ fontSize: 11, color: C.gray, fontFamily: FONT }}>{b.desc}</div>
+            </button>
+          ))}
+        </div>
+        <SectionLabel>Настройки матчей</SectionLabel>
+        <CardWrap style={{ marginBottom: 12 }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+            <NumberStepper label="Четвертей" value={quarters} onChange={setQuarters} min={1} max={8} />
+            <div style={{ height: 1, background: C.grayUltra }} />
+            <NumberStepper label="Минут в четверти" value={quarterMin} onChange={setQuarterMin} min={1} max={30} unit="мин" />
+          </div>
+        </CardWrap>
+        <CardWrap style={{ marginBottom: 16 }}>
+          <div style={{ fontSize: 12, color: C.gray, textAlign: "center" }}>
+            Матчей: <span style={{ fontWeight: 700, color: C.dark, fontFamily: MONO }}>{mc}</span> · По <span style={{ fontWeight: 700, color: C.dark, fontFamily: MONO }}>{quarters * quarterMin} мин</span>
+          </div>
+        </CardWrap>
+        <Btn full onClick={() => { setTournamentMatches(generateMatches(tournamentTeams, bracketType)); setStep("match_list"); }}>🏆 Начать турнир</Btn>
+      </div>
+    );
+  }
+
+  /* ── Match List ── */
+  if (step === "match_list") {
+    const done = tournamentMatches.filter(m => m.done).length;
+    const next = tournamentMatches.findIndex(m => !m.done);
+    return (
+      <div style={{ flex: 1, overflowY: "auto", background: C.bg, padding: "20px 16px" }}>
+        <div style={{ textAlign: "center", marginBottom: 16 }}>
+          <div style={{ fontSize: 20, fontWeight: 800, color: C.dark }}>Матчи турнира</div>
+          <div style={{ fontSize: 12, color: C.gray, marginTop: 4 }}>Сыграно {done} из {tournamentMatches.length}</div>
+          <div style={{ height: 4, borderRadius: 2, background: C.grayUltra, marginTop: 10, overflow: "hidden" }}>
+            <div style={{ height: "100%", borderRadius: 2, width: `${(done / tournamentMatches.length) * 100}%`, background: C.green }} />
+          </div>
+        </div>
+        {tournamentMatches.map((m, i) => {
+          const isNext = i === next;
+          return (
+            <div key={i} style={{
+              background: m.done ? C.cardAlt : C.white, borderRadius: 14, padding: "12px 16px", marginBottom: 8,
+              border: isNext ? `2px solid ${C.green}` : `1px solid ${C.grayUltra}`, opacity: m.done ? 0.7 : 1,
+            }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <div style={{ fontSize: 11, color: C.gray, fontWeight: 600 }}>{m.round ? `Раунд ${m.round} ·` : ""} Матч {i + 1}</div>
+                {m.done && <span style={{ fontSize: 10, color: C.green, fontWeight: 700 }}>✓ Завершён</span>}
+                {isNext && <span style={{ fontSize: 10, color: C.green, fontWeight: 700 }}>Следующий</span>}
+              </div>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 12, marginTop: 8 }}>
+                <span style={{ fontSize: 14, fontWeight: 700, color: C.dark, flex: 1, textAlign: "right" }}>{m.a}</span>
+                {m.done
+                  ? <span style={{ fontSize: 18, fontWeight: 900, fontFamily: MONO, color: C.dark, minWidth: 60, textAlign: "center" }}>{m.scoreA} : {m.scoreB}</span>
+                  : <span style={{ fontSize: 14, color: C.grayLight, minWidth: 40, textAlign: "center" }}>vs</span>}
+                <span style={{ fontSize: 14, fontWeight: 700, color: C.dark, flex: 1, textAlign: "left" }}>{m.b}</span>
+              </div>
+            </div>
+          );
+        })}
+        {next !== -1 && <Btn full onClick={() => startMatch(next)} style={{ marginTop: 8 }}>▶ Начать матч {next + 1}</Btn>}
+      </div>
+    );
+  }
+
+  /* ── Match Playing (Tournament) ── */
+  if (step === "match_playing") return (
+    <div style={{ flex: 1, overflowY: "auto", background: C.dark }}>
+      <div style={{ textAlign: "center", padding: "8px 16px 2px" }}>
+        <div style={{ fontSize: 10, color: C.gray, fontWeight: 600, textTransform: "uppercase" }}>Матч {currentMatchIdx + 1} · Четверть {currentQuarter}/{quarters}</div>
+      </div>
+      <div style={{ textAlign: "center", padding: "4px 16px 10px" }}>
+        <div style={{ fontSize: 50, fontWeight: 900, fontFamily: MONO, color: C.white, lineHeight: 1 }}>{fmtTime(timer)}</div>
+        <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 10 }}>
+          <button onClick={() => setTimerRunning(!timerRunning)} style={{
+            padding: "9px 28px", borderRadius: 12, background: timerRunning ? C.red : C.green,
+            color: C.white, border: "none", fontFamily: FONT, fontSize: 14, fontWeight: 700, cursor: "pointer",
+          }}>{timerRunning ? "⏸ Пауза" : "▶ Старт"}</button>
+          <button onClick={() => {
+            if (currentQuarter < quarters) { setCurrentQuarter(q => q + 1); setTimer(quarterMin * 60); setTimerRunning(false); }
+            else finishMatch();
+          }} style={{
+            padding: "9px 18px", borderRadius: 12, background: "rgba(255,255,255,0.1)", color: C.white,
+            border: "none", fontFamily: FONT, fontSize: 14, fontWeight: 600, cursor: "pointer",
+          }}>{currentQuarter < quarters ? "След. →" : "Завершить"}</button>
+        </div>
+      </div>
+      <Scoreboard tA={matchTeamA} tB={matchTeamB} />
+      <div style={{ textAlign: "center", padding: 10 }}>
+        {matchHistory.length > 0 && (
+          <button onClick={undoLast} style={{ padding: "7px 18px", borderRadius: 10, background: "rgba(255,255,255,0.06)", color: C.gray, border: "none", fontFamily: FONT, fontSize: 12, fontWeight: 600, cursor: "pointer" }}>↩ Отменить</button>
+        )}
+      </div>
+    </div>
+  );
+
+  /* ── Tournament Results ── */
+  if (step === "tournament_results") {
+    const standings = {};
+    tournamentTeams.filter(t => t.trim()).forEach(t => { standings[t] = { w: 0, l: 0, scored: 0 }; });
+    tournamentMatches.filter(m => m.done && m.b !== "BYE").forEach(m => {
+      if (standings[m.a]) { standings[m.a].scored += m.scoreA; }
+      if (standings[m.b]) { standings[m.b].scored += m.scoreB; }
+      if (m.scoreA > m.scoreB) { if (standings[m.a]) standings[m.a].w++; if (standings[m.b]) standings[m.b].l++; }
+      else if (m.scoreB > m.scoreA) { if (standings[m.b]) standings[m.b].w++; if (standings[m.a]) standings[m.a].l++; }
+    });
+    const sorted = Object.entries(standings).sort((a, b) => b[1].w - a[1].w || b[1].scored - a[1].scored);
+    const medals = [C.gold, C.silver, C.bronze];
+
+    return (
+      <div style={{ flex: 1, overflowY: "auto", background: C.bg, padding: "20px 16px" }}>
+        <div style={{ textAlign: "center", marginBottom: 20 }}>
+          <div style={{ fontSize: 48, marginBottom: 4 }}>🏆</div>
+          <div style={{ fontSize: 20, fontWeight: 800, color: C.dark }}>Итоги турнира</div>
+        </div>
+        {/* Podium */}
+        <CardWrap style={{ marginBottom: 16, padding: "20px 16px" }}>
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-end", gap: 8 }}>
+            {[1, 0, 2].map(idx => {
+              const team = sorted[idx];
+              if (!team) return null;
+              const h = idx === 0 ? 80 : idx === 1 ? 60 : 48;
+              return (
+                <div key={idx} style={{ textAlign: "center", flex: 1 }}>
+                  <div style={{ fontSize: 11, fontWeight: 700, color: C.dark, marginBottom: 4, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{team[0]}</div>
+                  <div style={{
+                    height: h, borderRadius: "10px 10px 0 0", background: medals[idx],
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    fontSize: 22, fontWeight: 900, color: C.white, fontFamily: MONO,
+                  }}>{idx + 1}</div>
+                </div>
+              );
+            })}
+          </div>
+        </CardWrap>
+        <SectionLabel>Таблица</SectionLabel>
+        <CardWrap style={{ marginBottom: 16 }}>
+          {sorted.map(([name, s], i) => (
+            <div key={name} style={{
+              display: "flex", alignItems: "center", gap: 10, padding: "10px 0",
+              borderBottom: i < sorted.length - 1 ? `1px solid ${C.grayUltra}` : "none",
+            }}>
+              <div style={{
+                width: 26, height: 26, borderRadius: 7,
+                background: i < 3 ? medals[i] : C.cardAlt,
+                display: "flex", alignItems: "center", justifyContent: "center",
+                fontSize: 12, fontWeight: 800, fontFamily: MONO, color: i < 3 ? C.white : C.dark,
+              }}>{i + 1}</div>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: 14, fontWeight: 600, color: C.dark }}>{name}</div>
+                <div style={{ fontSize: 11, color: C.gray }}>{s.w}W – {s.l}L</div>
+              </div>
+              <div style={{ fontSize: 16, fontWeight: 800, fontFamily: MONO, color: C.dark }}>{s.scored}</div>
+            </div>
+          ))}
+        </CardWrap>
+        <SectionLabel>Результаты матчей</SectionLabel>
+        {tournamentMatches.filter(m => m.done && m.b !== "BYE").map((m, i) => (
+          <div key={i} style={{
+            background: C.white, borderRadius: 12, padding: "10px 14px", marginBottom: 6,
+            border: `1px solid ${C.grayUltra}`, display: "flex", alignItems: "center", justifyContent: "center", gap: 10,
+          }}>
+            <span style={{ fontSize: 13, fontWeight: 600, color: m.scoreA > m.scoreB ? C.green : C.dark, flex: 1, textAlign: "right" }}>{m.a}</span>
+            <span style={{ fontSize: 16, fontWeight: 900, fontFamily: MONO, color: C.dark, minWidth: 50, textAlign: "center" }}>{m.scoreA}:{m.scoreB}</span>
+            <span style={{ fontSize: 13, fontWeight: 600, color: m.scoreB > m.scoreA ? C.green : C.dark, flex: 1, textAlign: "left" }}>{m.b}</span>
+          </div>
+        ))}
+        <Btn full bg={C.dark} color={C.white} onClick={fullReset} style={{ marginTop: 12 }}>Новый турнир</Btn>
+      </div>
+    );
+  }
+
+  return null;
+}
+
+
+/* ═══════════════════════════════════════════
+   STATS SCREEN
+   ═══════════════════════════════════════════ */
+function StatsScreen() {
+  const sampleStats = {};
+  const csvData = [
+    { id: 1, made: 14, missed: 3, time: "0:48:23", pct: 82 },
+    { id: 2, made: 11, missed: 0, time: "0:29:18", pct: 100 },
+    { id: 3, made: 18, missed: 7, time: "1:07:13", pct: 72 },
+    { id: 4, made: 23, missed: 12, time: "2:00:20", pct: 66 },
+    { id: 5, made: 15, missed: 4, time: "1:10:15", pct: 79 },
+    { id: 6, made: 13, missed: 2, time: "0:54:51", pct: 87 },
+    { id: 7, made: 15, missed: 4, time: "1:03:33", pct: 79 },
+    { id: 8, made: 15, missed: 4, time: "2:18:07", pct: 79 },
+    { id: 9, made: 26, missed: 15, time: "4:10:35", pct: 63 },
+    { id: 10, made: 23, missed: 21, time: "5:00:00", pct: 52 },
+    { id: 11, made: 6, missed: 21, time: "5:00:00", pct: 22 },
+    { id: 12, made: 16, missed: 13, time: "5:00:00", pct: 55 },
+    { id: 13, made: 16, missed: 10, time: "3:27:54", pct: 62 },
+    { id: 14, made: 14, missed: 13, time: "5:00:00", pct: 52 },
+    { id: 15, made: 12, missed: 15, time: "5:00:00", pct: 44 },
+    { id: 16, made: 0, missed: 3, time: "0:45:00", pct: 0 },
+    { id: 17, made: 0, missed: 3, time: "0:54:21", pct: 0 },
+    { id: 18, made: 0, missed: 3, time: "0:36:09", pct: 0 },
+    { id: 19, made: 0, missed: 3, time: "0:43:51", pct: 0 },
+    { id: 20, made: 4, missed: 0, time: "0:48:09", pct: 100 },
+  ];
+  csvData.forEach(d => { sampleStats[d.id] = { made: d.made, missed: d.missed }; });
+  const totalMade = csvData.reduce((a, b) => a + b.made, 0);
+  const totalMissed = csvData.reduce((a, b) => a + b.missed, 0);
+  const totalShots = totalMade + totalMissed;
+  const totalPct = Math.round((totalMade / totalShots) * 100);
+
+  return (
+    <div style={{ flex: 1, overflowY: "auto", background: C.bg }}>
+      <div style={{ background: C.dark, margin: 16, borderRadius: 20, padding: "24px 20px", color: C.white }}>
+        <div style={{ fontSize: 11, opacity: 0.5, fontWeight: 600, marginBottom: 4, textTransform: "uppercase" }}>#27 SEMENOV.D · Общая статистика</div>
+        <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginBottom: 16 }}>
+          <span style={{ fontSize: 56, fontWeight: 900, fontFamily: MONO, lineHeight: 1 }}>{totalPct}</span>
+          <span style={{ fontSize: 24, fontWeight: 600, opacity: 0.6 }}>%</span>
+        </div>
+        <div style={{ display: "flex", gap: 20 }}>
+          {[
+            { v: totalMade, l: "попаданий", c: C.green },
+            { v: totalMissed, l: "промахов", c: C.redSoft },
+            { v: totalShots, l: "бросков", c: C.white },
+          ].map((d, i) => (
+            <div key={i}>
+              <div style={{ fontSize: 22, fontWeight: 800, fontFamily: MONO, color: d.c }}>{d.v}</div>
+              <div style={{ fontSize: 10, opacity: 0.5 }}>{d.l}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div style={{ padding: "0 16px 8px" }}>
+        <SectionLabel>Карта бросков</SectionLabel>
+        <CardWrap style={{ padding: 12 }}>
+          <CourtSVG stats={sampleStats} selectedPos={null} onSelectPos={() => {}} compact />
+        </CardWrap>
+      </div>
+      <div style={{ padding: "8px 16px 16px" }}>
+        <SectionLabel>По позициям</SectionLabel>
+        {csvData.map(d => {
+          const pos = POSITIONS.find(p => p.id === d.id);
+          const total = d.made + d.missed;
+          const barW = total > 0 ? (d.made / total) * 100 : 0;
+          return (
+            <div key={d.id} style={{
+              background: C.white, borderRadius: 12, padding: "10px 14px", marginBottom: 6,
+              border: `1px solid ${C.grayUltra}`, display: "flex", alignItems: "center", gap: 10,
+            }}>
+              <div style={{
+                width: 34, height: 34, borderRadius: 10,
+                background: d.pct >= 70 ? "rgba(91,191,61,0.1)" : d.pct >= 40 ? "rgba(243,156,18,0.1)" : "rgba(231,76,60,0.1)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                fontSize: 13, fontWeight: 800, fontFamily: MONO,
+                color: d.pct >= 70 ? C.green : d.pct >= 40 ? C.orange : C.red,
+              }}>{d.pct}</div>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: 13, fontWeight: 600, color: C.dark, marginBottom: 4 }}>{pos?.name}</div>
+                <div style={{ height: 4, borderRadius: 2, background: C.grayUltra, overflow: "hidden" }}>
+                  <div style={{ height: "100%", borderRadius: 2, width: `${barW}%`, background: d.pct >= 70 ? C.green : d.pct >= 40 ? C.orange : C.red }} />
+                </div>
+              </div>
+              <div style={{ textAlign: "right" }}>
+                <div style={{ fontSize: 12, fontFamily: MONO, color: C.dark }}><span style={{ color: C.green }}>{d.made}</span>/<span>{total}</span></div>
+                <div style={{ fontSize: 10, color: C.gray }}>{d.time}</div>
+              </div>
+            </div>
+          );
+        })}
+        <button style={{
+          width: "100%", padding: "14px 0", borderRadius: 16, background: C.dark, color: C.white,
+          border: "none", fontSize: 14, fontWeight: 700, fontFamily: FONT, cursor: "pointer",
+          marginTop: 12, display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+        }}>📤 Экспорт инфографики</button>
+      </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════
+   PROFILE SCREEN
+   ═══════════════════════════════════════════ */
+function ProfileScreen() {
+  return (
+    <div style={{ flex: 1, overflowY: "auto", background: C.bg, padding: "20px 16px" }}>
+      <div style={{ textAlign: "center", marginBottom: 24 }}>
+        <div style={{
+          width: 80, height: 80, borderRadius: "50%",
+          background: `linear-gradient(135deg, ${C.green}, ${C.greenDark})`,
+          display: "inline-flex", alignItems: "center", justifyContent: "center",
+          fontSize: 32, fontWeight: 900, color: C.white, fontFamily: MONO, marginBottom: 12,
+        }}>27</div>
+        <div style={{ fontSize: 20, fontWeight: 800, color: C.dark }}>Semenov D.</div>
+        <div style={{ fontSize: 13, color: C.gray }}>Shooting Guard · #27</div>
+      </div>
+      <CardWrap style={{ marginBottom: 12 }}>
+        <div style={{ fontSize: 11, color: C.gray, fontWeight: 600, marginBottom: 12, textTransform: "uppercase" }}>Сезон 2025</div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8 }}>
+          {[{ label: "Тренировок", value: "24" }, { label: "Игр", value: "8" }, { label: "Точность", value: "61%" }].map((s, i) => (
+            <div key={i} style={{ textAlign: "center", padding: "8px 0" }}>
+              <div style={{ fontSize: 22, fontWeight: 800, fontFamily: MONO, color: C.dark }}>{s.value}</div>
+              <div style={{ fontSize: 10, color: C.gray, fontWeight: 500 }}>{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </CardWrap>
+      <CardWrap style={{ marginBottom: 12 }}>
+        <div style={{ fontSize: 11, color: C.gray, fontWeight: 600, marginBottom: 12, textTransform: "uppercase" }}>🏆 Турнирная таблица</div>
+        {[
+          { pos: 1, name: "Semenov D.", pts: 156, w: 6, l: 2 },
+          { pos: 2, name: "Ivanov A.", pts: 142, w: 5, l: 3 },
+          { pos: 3, name: "Petrov K.", pts: 128, w: 4, l: 4 },
+          { pos: 4, name: "Sidorov M.", pts: 115, w: 3, l: 5 },
+          { pos: 5, name: "Kuznetsov R.", pts: 98, w: 2, l: 6 },
+        ].map((p, i) => (
+          <div key={i} style={{
+            display: "flex", alignItems: "center", gap: 12, padding: "10px 0",
+            borderBottom: i < 4 ? `1px solid ${C.grayUltra}` : "none",
+          }}>
+            <div style={{
+              width: 28, height: 28, borderRadius: 8,
+              background: i === 0 ? C.green : C.cardAlt,
+              display: "flex", alignItems: "center", justifyContent: "center",
+              fontSize: 13, fontWeight: 800, fontFamily: MONO, color: i === 0 ? C.white : C.dark,
+            }}>{p.pos}</div>
+            <div style={{ flex: 1 }}>
+              <div style={{ fontSize: 14, fontWeight: 600, color: C.dark }}>{p.name}</div>
+              <div style={{ fontSize: 11, color: C.gray }}>{p.w}W – {p.l}L</div>
+            </div>
+            <div style={{ fontSize: 18, fontWeight: 800, fontFamily: MONO, color: C.dark }}>{p.pts}</div>
+          </div>
+        ))}
+      </CardWrap>
+      <div style={{ background: C.white, borderRadius: 16, border: `1px solid ${C.grayUltra}`, overflow: "hidden" }}>
+        {["Настройки профиля", "Позиции на площадке", "Экспорт данных", "О приложении"].map((label, i) => (
+          <div key={i} style={{
+            display: "flex", justifyContent: "space-between", alignItems: "center",
+            padding: "14px 18px", borderBottom: i < 3 ? `1px solid ${C.grayUltra}` : "none",
+            fontSize: 14, color: C.dark, cursor: "pointer",
+          }}><span>{label}</span><span style={{ color: C.grayLight, fontSize: 16 }}>›</span></div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════
+   MAIN SHELL — fullscreen mobile
+   ═══════════════════════════════════════════ */
+function ShotTrackerApp() {
+  const [tab, setTab] = useState("training");
+  const isDark = tab === "game";
+
+  return (
+    <div style={{
+      width: "100%", minHeight: "100vh", maxWidth: 480, margin: "0 auto",
+      background: isDark ? C.dark : C.bg,
+      fontFamily: FONT, display: "flex", flexDirection: "column",
+      position: "relative",
+    }}>
+      {/* Safe area top spacer */}
+      <div style={{
+        paddingTop: "env(safe-area-inset-top, 12px)",
+        background: isDark ? C.dark : C.bg,
+      }} />
+
+      {/* Nav title */}
+      <div style={{ padding: "4px 20px 10px", background: isDark ? C.dark : C.bg }}>
+        <div style={{ fontSize: 28, fontWeight: 800, letterSpacing: "-0.02em", color: isDark ? C.white : C.dark, fontFamily: FONT }}>
+          {tab === "training" && "Тренировка"}
+          {tab === "game" && "Игра"}
+          {tab === "stats" && "Статистика"}
+          {tab === "profile" && "Профиль"}
+        </div>
+      </div>
+
+      {/* Screen content */}
+      <div style={{ flex: 1, overflow: "auto", display: "flex", flexDirection: "column" }}>
+        {tab === "training" && <TrainingScreen />}
+        {tab === "game" && <GameScreen />}
+        {tab === "stats" && <StatsScreen />}
+        {tab === "profile" && <ProfileScreen />}
+      </div>
+
+      {/* Tab bar with safe area bottom */}
+      <div style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)", background: C.white }}>
+        <TabBar active={tab} onTab={setTab} />
+      </div>
+    </div>
+  );
+}
+
+
+ReactDOM.createRoot(document.getElementById("root")).render(<ShotTrackerApp />);
+</script>
+
+<script>
+// Register Service Worker for offline support
+if ('serviceWorker' in navigator) {
+  const swCode = `
+    const CACHE = 'shot-tracker-v1';
+    const URLS = [
+      './',
+      'https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js'
+    ];
+    self.addEventListener('install', e => e.waitUntil(caches.open(CACHE).then(c => c.addAll(URLS)).then(() => self.skipWaiting())));
+    self.addEventListener('activate', e => e.waitUntil(self.clients.claim()));
+    self.addEventListener('fetch', e => {
+      e.respondWith(caches.match(e.request).then(r => r || fetch(e.request).then(res => {
+        const clone = res.clone();
+        caches.open(CACHE).then(c => c.put(e.request, clone));
+        return res;
+      })));
+    });
+  `;
+  const blob = new Blob([swCode], { type: 'application/javascript' });
+  navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(() => {});
+}
+</script>
+</body>
+</html>
